@@ -1,6 +1,6 @@
 import React from 'react'
-import BarraPrincipal  from './barraPrincipal.js';
-import DatosInicialesPersona from './datosInicialesPersona.js'
+import MainBar  from './MainBar.js';
+import InitialPersonalData from './InitialPersonalData.js'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -11,8 +11,9 @@ const useStyles = makeStyles({
         height: '100%',
         justifyContent: 'space-between',
         flexDirection: 'column',
-        margin: 10,
-        backgroundColor: '#c7c7c7',
+        margin: 5,
+        marginTop: 70,
+        backgroundColor: '#ececec',
     }
 })
 
@@ -20,9 +21,9 @@ export default function Formulario() {
     const classes = useStyles();
   return (
     <div className={classes.root}>
-            <BarraPrincipal/>
+            <MainBar/>
         <main className={classes.content}>
-            <DatosInicialesPersona/>
+            <InitialPersonalData/>
         </main>
     </div>
   )

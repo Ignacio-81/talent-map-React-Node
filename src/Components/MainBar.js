@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function BarraPrincipal(props) {
+export default function MainBar(props) {
     const classes = useStyles();
     return (
           <AppBar>

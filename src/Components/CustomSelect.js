@@ -13,7 +13,7 @@ export default function CustomSelect(props) {
   };
 
   return (
-    <FormControl style={{minWidth: '100%'}}>
+    <FormControl style={{maxWidth: '100%'}}>
       <Select
         labelId={label}
         value={province}
