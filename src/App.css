@@ -1,3 +1,9 @@
+.primary {
+    background-color: #1473e6;    color : #4b4b4b,
+}
+.secondary {
+    background-color: #747474,
+}
 .App {
   text-align: center;
 }

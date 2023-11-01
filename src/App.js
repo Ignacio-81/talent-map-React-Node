@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import Formulario from './Components/formulario';
 
 //Creamos en Tema para la aplicacion customizando MUI
 const theme = createMuiTheme({
@@ -13,6 +14,7 @@ const theme = createMuiTheme({
         },
         secondary: {
             main: '#747474',
+            secondary: '#ffff',
         },
     }
 
@@ -20,22 +22,8 @@ const theme = createMuiTheme({
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <div >
-                <header >
-                    <p>
-                        Edit <code>src/App.js</code> and save to reload.
-                    </p>
-                    <a
-                        className="App-link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Learn React
-                    </a>
-                </header>
-            </div>
-       </ThemeProvider>
+            <Formulario/>
+        </ThemeProvider>
     );
 }
 
