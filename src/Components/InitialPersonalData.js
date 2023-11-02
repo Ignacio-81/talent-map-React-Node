@@ -10,16 +10,14 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import nulle from '../images/nulle.png'
 
-import GrillaDatos from './GrillaDatos.js';
+import PersonalDataGrid from './PersonalDataGrid.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
-    },
-    border: {
+        backgroundColor: '#ececec',
         borderRadius: 10,
         boxShadow: '0 4px 8px 0 rgba(37, 38, 94, 0.1)',
-        margin: 'auto',
+        marginRight: '1vw',
     },
     card: {
         display: 'grid',
@@ -39,14 +37,14 @@ const useStyles = makeStyles((theme) => ({
 export default function InitialPersonalData() {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div /* className={classes.root} */>
             <Grid
                 container
                 direction="row"
                 justify='space-evenly'
                 alignItems="center"
                 spacing={2}
-                className={classes.border}
+                className={classes.root}
             >
 
                 <Grid item>
@@ -68,7 +66,7 @@ export default function InitialPersonalData() {
                 </Card>
                 </Grid>
             <Grid item xs={9}> 
-                <GrillaDatos/>
+                <PersonalDataGrid/>
             </Grid>
             </Grid>
         </div>
