@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import SkillsGrid from './SkillsGrid.js'
+import DividerBar from './DividerBar.js';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -36,6 +37,7 @@ export default function SkillsBox(props) {
     const classes = useStyles();
     return (
             <div className={classes.box}>
+                <DividerBar/>
                 {mainSkills.map(skill => (
                     <Accordion className={classes.heading}>
                         <AccordionSummary

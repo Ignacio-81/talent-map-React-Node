@@ -1,9 +1,13 @@
 import React from 'react'
+//Material
+import { makeStyles } from '@material-ui/core/styles';
+//Components
 import MainBar  from './MainBar.js';
 import InitialPersonalData from './InitialPersonalData.js'
 import SkillsBox from './SkillsBox.js';
+//Constants
 import {mainSkills} from '../Utils/consts.js'
-import { makeStyles } from '@material-ui/core/styles';
+
 
 const useStyles = makeStyles({
     root: {
@@ -26,6 +30,7 @@ export default function Form() {
             <MainBar/>
         <main className={classes.content}>
             <InitialPersonalData/>
+            
             <SkillsBox
                 mainSkills={mainSkills}
             />
