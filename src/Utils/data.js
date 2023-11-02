@@ -28,12 +28,16 @@ export const estudios = [
     { id: 10, data: "Posgrado completo" },
 ]
 
-
-
-
-
-
-
-
-
-
+export const sistemasOperativos = [
+    { id: 0, data: "LINUX" },
+    { id: 1, data: "WINDOWS" },
+    { id: 2, data: "UBUNTU SERVER" },
+    { id: 3, data: "CITRIX" },
+    { id: 4, data: "WEBLOGIC " },
+    { id: 5, data: "APACHE" },
+    { id: 6, data: "ORACLE LINUX" },
+    { id: 7, data: "HTTP SERVER ORACLE OHS" },
+    { id: 8, data: "NGINX" },
+    { id: 9, data: "TOMCAT" },
+]
+ 

@@ -1,8 +1,10 @@
 .primary {
-    background-color: #1473e6;    color : #4b4b4b,
+    background-color: #0a4894fe;    color : #616161,
 }
 .secondary {
-    background-color: #ececec,
+    background-color: #ececec;
+    color : white,
+
 }
 .App {
   text-align: center;
