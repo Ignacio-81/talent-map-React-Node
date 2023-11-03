@@ -67,16 +67,15 @@
         { "nombre": "Ignacio" },
         { "apellido": "Badella" },
         { "legajo": 358 },
-        { "fechaDeIngreso": "CITRIX" },
-        { "puesto": "WEBLOGIC " },
-        { "seniority": "APACHE" },
-        { "estudioMaximoAlcanzado": "ORACLE LINUX" },
-        { "cv": "HTTP SERVER ORACLE OHS" },
-        { "nivelDeIngles": "NGINX" },
-        { "nivelInglesBritanico": "TOMCAT" },
-        { "certificadoIngles": "ORACLE LINUX" },
-        { "nivelMetAgiles": "NGINX" },
-        { "competencias": "TOMCAT" }
+        { "fechaDeIngreso": "2021-06-01" },
+        { "puesto": "Developer" },
+        { "seniority": "Jr" },
+        { "estudioMaximoAlcanzado": "Universitario completo" },
+        { "cv": "ignaciobadella.pdf" },
+        { "nivelDeIngles": "Avanzado" },
+        { "nivelInglesBritanico": null },
+        { "certificadoIngles": null },
+        { "nivelMetAgiles": "Avanzado" }
       ]
     }
   ]
