@@ -58,5 +58,26 @@
     { "id": 7, "data": "HTTP SERVER ORACLE OHS" },
     { "id": 8, "data": "NGINX" },
     { "id": 9, "data": "TOMCAT" }
-]
+],
+
+"datosPersonales": [
+    {
+      "id": 1,
+      "data": [
+        { "nombre": "Ignacio" },
+        { "apellido": "Badella" },
+        { "legajo": 358 },
+        { "fechaDeIngreso": "CITRIX" },
+        { "puesto": "WEBLOGIC " },
+        { "seniority": "APACHE" },
+        { "estudioMaximoAlcanzado": "ORACLE LINUX" },
+        { "cv": "HTTP SERVER ORACLE OHS" },
+        { "nivelDeIngles": "NGINX" },
+        { "nivelInglesBritanico": "TOMCAT" },
+        { "certificadoIngles": "ORACLE LINUX" },
+        { "nivelMetAgiles": "NGINX" },
+        { "competencias": "TOMCAT" }
+      ]
+    }
+  ]
 }
