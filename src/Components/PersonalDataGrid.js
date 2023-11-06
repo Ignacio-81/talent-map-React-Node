@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 
 import UploadButton from '../Components/UploadButton.js'
 
-import { txtPersonalData } from '../Utils/consts.js'
+import { txtPersonalData, URL_TEST_INGLES } from '../Utils/consts.js'
 
 const useStyles = makeStyles((theme) => ({
     label: {
@@ -34,7 +34,6 @@ export default function PersonalDataGrid(props) {
     const classes = useStyles();
 
     const { data, error, loading } = props;
-    let dataFormatted;
 
     return (
         //Container general 
@@ -54,8 +53,7 @@ export default function PersonalDataGrid(props) {
                 <Typography style={{ backgroundColor: "green", textAlign: 'center' }} variant="h3" >No hay Datos... </Typography>
                 :
                 <>
-                   {console.log('Pesonal Data grid '+ JSON.stringify(data)+ typeof(data))}
-                    {console.log(Object.values(data)[0] + ' '+ Object.keys(data[0])[0])}
+                   {console.log('Pesonal Data grid '+ JSON.stringify(data.nivelDeIngles)+ typeof(data))}
                     <Grid container>
                         <Grid item container={true} direction="row" alignItems="flex-end" >
                             {/* LABEL TEXT */}
@@ -70,14 +68,14 @@ export default function PersonalDataGrid(props) {
                                 alignItems="flex-start"
                             >
                             {
-                                data.slice(2, 6).map( (obj) =>
-                                <TextField key={Object.keys(obj)[0]} value={Object.values(obj)[0]} fullWidth />
+                                Object.values(data).slice(2,6).map( (value) =>
+                                <TextField key={value} value={value} fullWidth />
                             )}
                                 <Grid xs={3} item container={true} direction="row" justifyContent="center" >
                                     <CustomSelect
                                         label='Estudios'
                                         objects={estudios}
-                                        /* value={dataFormatted[6].estudioMaximoAlcanzado} */
+                                        value={data.estudioMaximoAlcanzado ? data.estudioMaximoAlcanzado.id : null}
                                         typographySize='body2'
                                     />
 
@@ -100,6 +98,7 @@ export default function PersonalDataGrid(props) {
                                     <CustomSelect
                                         label={txtPersonalData[7]}
                                         objects={nivel}
+                                        value={data.nivelDeIngles ? data.nivelDeIngles.id : null}
                                         typographySize='body2'
                                     />
                                 </Grid>
@@ -107,13 +106,14 @@ export default function PersonalDataGrid(props) {
                                     <CustomSelect
                                         label='Nivel Ingles Britanico'
                                         objects={nivelInglesBritanicoTxt}
+                                        value={data.nivelInglesBritanico ? data.nivelInglesBritanico.id : null}
                                         typographySize='body2'
                                     />
                                 </Grid>
                                 <Grid item xs style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                     <Button size="small" variant="contained"
                                         target="_blank" rel="noopener noreferrer"
-                                        href='https://www.cambridgeenglish.org/es/test-your-english/general-english/'>
+                                        href={URL_TEST_INGLES}>
                                         TEST
                                     </Button>
                                 </Grid>
@@ -135,6 +135,7 @@ export default function PersonalDataGrid(props) {
                                     <CustomSelect
                                         label={txtPersonalData[9]}
                                         objects={nivel}
+                                        value={data.nivelMetAgiles ? data.nivelMetAgiles.id : null}
                                         typographySize='body2'
                                     />
                                 </Grid>

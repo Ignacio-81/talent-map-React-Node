@@ -44,24 +44,23 @@ export default function Form() {
     const loading = useSelector(state => state.personalData.loading);
 
     useEffect(()=>{
-        console.log(personalInformation)
+        console.log(personalInformation.data)
         
-        if (personalInformation && Object.keys(personalInformation).length > 0){
+        if (personalInformation.data && Object.keys(personalInformation.data).length > 0){
             console.log(typeof(personalInformation))
-            /* console.log(Object.values(personalInformation.data)[0]) */
-            console.log(Object.values(personalInformation)[1][0].nombre)
-            console.log(Object.values(personalInformation)[1][1].apellido)
+            console.log(personalInformation.data.apellido)
+            console.log(personalInformation.data.legajo)
         }
     },[personalInformation])
   return (
     <div className={classes.root}>
             <MainBar
-                nombre={personalInformation && Object.keys(personalInformation).length ? Object.values(personalInformation)[1][0].nombre : '' }
-                apellido={personalInformation &&  Object.keys(personalInformation).length ? Object.values(personalInformation)[1][1].apellido: ''}
+                nombre={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data.nombre : '' }
+                apellido={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data.apellido: ''}
             />
         <main className={classes.content}>
             <InitialPersonalData
-                data={personalInformation && Object.keys(personalInformation).length ? Object.values(personalInformation)[1] : null}
+                data={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data : null}
                 error={error}
                 loading={loading}
             />
