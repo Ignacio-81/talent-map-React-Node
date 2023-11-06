@@ -47,6 +47,13 @@
     { "id": 10, "data": "Posgrado completo" }
 ],
 
+"tiempo" : [
+    { "id": 0, "data": "En Formación" },
+    { "id": 1, "data": "0 - 6 meses" },
+    { "id": 2, "data": "2 años" },
+    { "id": 3, "data": "mas de 5 años" },
+],
+  
 "sistemasOperativos" : [
     { "id": 0, "data": "LINUX" },
     { "id": 1, "data": "WINDOWS" },
@@ -76,6 +83,29 @@
          "nivelInglesBritanico": null ,
          "certificadoIngles": null ,
          "nivelMetAgiles": {"id": 2, "data": "Avanzado"} 
+      }
+    }
+  ]
+  "skillsPersonales": [
+    {
+      "id": 1,
+      "data": {
+         "sistemaOp01": { "id": 1, "data": "WINDOWS"},
+         "nivel01" : { "id": 1, "data": "Intermedio"},
+        "tiempo01" : { "id": 3, "data": "mas de 5 años" },
+        "Comentarios01" : "Certificado.pdf",
+         "sistemaOp02": { "id": 8, "data": "NGINX"} ,
+          "nivel02" : { "id": 0, "data": "Inicial"},
+         "tiempo01" : { "id": 1, "data": "0 - 6 meses" },
+        "Comentarios02" : "Curso Online",
+         "sistemaOp03": null ,
+          "nivel03" : null,
+         "tiempo03" : null,
+        "Comentarios03" : null,
+         "OtroSop": "Otro" ,
+        "nivelOtro" : null,
+         "tiempo03" : null,
+        "Comentarios04" : null
       }
     }
   ]
