@@ -56,14 +56,12 @@
     { "id": 9, "data": "Posgrado en suspenso" },
     { "id": 10, "data": "Posgrado completo" }
   ],
-
   "tiempo": [
     { "id": 0, "data": "En Formación"},
     { "id": 1, "data": "0 - 6 meses"},
     { "id": 2, "data": "2 años" },
     { "id": 3, "data": "mas de 5 años"}
   ],
-
   "sistemasOperativos": [
     { "id": 0, "data": "LINUX" },
     { "id": 1, "data": "WINDOWS" },
@@ -76,7 +74,6 @@
     { "id": 8, "data": "NGINX" },
     { "id": 9, "data": "TOMCAT" }
   ],
-
   "datosPersonales": [
     {
       "id": 1,
@@ -96,7 +93,6 @@
       }
     }
   ],
-
   "skillsPersonales": [
     {
       "id": 1,
