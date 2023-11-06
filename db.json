@@ -77,12 +77,6 @@
         "tiempo": { "id": 1, "data": "0 - 6 meses" },
         "comentarios": "Curso Online"
         },
-        "sistema03":{
-        "sistemaOp": null,
-        "nivel": null,
-        "tiempo": null,
-        "comentarios": null
-        },
         "otro":{
         "OtroSop": "Otro",
         "nivelOtro": null,
