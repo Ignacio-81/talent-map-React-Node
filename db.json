@@ -78,8 +78,8 @@
         "comentarios": "Curso Online"
         },
         "otro":{
-        "OtroSop": "Otro",
-        "nivelOtro": null,
+        "sistemaOp": "Otro",
+        "nivel": null,
         "tiempo": null,
         "comentarios": null
         }
