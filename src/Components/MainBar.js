@@ -27,10 +27,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainBar(props) {
     const classes = useStyles();
+    const {nombre, apellido} = props;
     return (
           <AppBar>
             <Toolbar className={classes.toolbar}>
-              <Typography className={classes.text}>IGNACIO BADELLA</Typography>
+              <Typography className={classes.text} >{`${nombre} ${apellido}`}</Typography>
             </Toolbar>
           </AppBar>
     );

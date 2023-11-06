@@ -39,16 +39,17 @@ export default function SkillsBox(props) {
             <div className={classes.box}>
                 <DividerBar/>
                 {mainSkills.map(skill => (
-                    <Accordion className={classes.heading}>
+                    <Accordion key={skill} className={classes.heading}>
                         <AccordionSummary
+                            key={skill}
                             expandIcon={<ExpandMoreIcon style={{ color: 'white' }} />}
                             aria-controls="panel1a-content"
-                            id="panel1a-header"
+                            id={skill}
                         >
-                            <Typography className={classes.headingtxt}>{skill}</Typography>
+                            <Typography key={skill} className={classes.headingtxt}>{skill}</Typography>
                         </AccordionSummary>
-                        <AccordionDetails >
-                            <SkillsGrid />
+                        <AccordionDetails key={skill} >
+                            <SkillsGrid key={skill}/>
                         </AccordionDetails>
                     </Accordion>
                 ))}

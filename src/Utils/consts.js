@@ -1,3 +1,7 @@
+// URLs
+export const URL_GET_DATOS_PERSONALES = 'https://my-json-server.typicode.com/Ignacio-81/mapa-de-talento/datosPersonales/1'
+export const URL_TUTORIAL = 'https://drive.google.com/file/d/1kkQW0hgXFjng7rZSl7UbP5_sFf1emhFi/view?_hsmi=254813860&_hsenc=p2ANqtz--p0zZEa7qi8yhrV6nGHgTgfJ5WcmKvVtQhLEXPsevrxHCkNQSdr7SlkYuj8ONHbGZOxJfPNN1EXGgjM8Ul8qhft3wz9w'
+// Labels
 export const txtPersonalData = [
     "Legajo",
     "Fecha de Ingreso",

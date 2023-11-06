@@ -1,8 +1,8 @@
 
 import {
-    GUARDAR_DATOS_PERSONA,
+/*     GUARDAR_DATOS_PERSONA,
     GUARDAR_DATOS_PERSONA_OK,
-    GUARDAR_DATOS_PERSONA_ERROR,
+    GUARDAR_DATOS_PERSONA_ERROR, */
     DESCARGA_DATOS_OK,
     DESCARGA_DATOS_ERROR,
     COMENZAR_DESCARGA_DATOS
@@ -22,6 +22,19 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 loading: action.payload
+            }
+        case DESCARGA_DATOS_ERROR:
+            return {
+                ...state,
+                loading : false,
+                error: action.payload
+            }
+        case DESCARGA_DATOS_OK:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                personalData: action.payload
             }
         default:
             return state;

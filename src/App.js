@@ -16,7 +16,6 @@ import store from './redux/store.js';
 const theme = createTheme({
     typography: {
         "textAlign": 'left',
-        /* htmlFontSize: 15, */
     },
     palette: {
         primary: {

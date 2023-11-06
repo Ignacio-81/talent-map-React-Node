@@ -5,7 +5,7 @@ export const nivel = [
     { id: 3, data: "Certificado" },
 ]
 
-export const nivelInglesBritanico = [
+export const nivelInglesBritanicoTxt = [
     { id: 0, data: "A1" },
     { id: 1, data: "A2" },
     { id: 2, data: "B1" },

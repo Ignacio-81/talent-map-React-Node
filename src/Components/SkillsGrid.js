@@ -64,18 +64,18 @@ export default function SkillsGrid() {
     return (
             <Grid container                 
             direction="row"
-            justify='space-evenly'
+            justifyContent='space-evenly'
             alignItems="center"
             spacing={1}>
                 <Grid item xs={2} className={classes.placeholder}></Grid>
-                <Grid item xs={10} justify='spacce-evenly' >
-                    <Grid item xs={12} spacing={1} style={{display:'flex'}}>
+                <Grid item xs={10} >
+                    <Grid item xs={12} style={{display:'flex'}}>
                         <FormRow />
                     </Grid>
-                    <Grid item xs={12} spacing={1} style={{display:'flex'}}>
+                    <Grid item xs={12} style={{display:'flex'}}>
                         <FormRow />
                     </Grid>
-                    <Grid item xs={12} spacing={1} style={{display:'flex'}}>
+                    <Grid item xs={12} style={{display:'flex'}}>
                         <FormRow />
                     </Grid>
                 </Grid>

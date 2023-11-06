@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 })
 
 export default function CustomSelect(props) {
-  const {label, objects, typographySize} = props;
+  const {label, objects, value, typographySize} = props;
   const [selection, setSelection] = useState(-1);
   const classes = useStyles();
 
@@ -41,7 +41,9 @@ export default function CustomSelect(props) {
   };
 
   return (
+    
     <FormControl style={{minWidth: '100%'}}>
+    {console.log (value)}
       <Select
         labelId={label}
         value={selection}
