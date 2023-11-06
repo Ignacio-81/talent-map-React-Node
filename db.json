@@ -17,32 +17,6 @@
       "data": "Certificado"
     }
   ],
-  "nivelInglesBritanico": [
-    {
-      "id": 0,
-      "data": "A1"
-    },
-    {
-      "id": 1,
-      "data": "A2"
-    },
-    {
-      "id": 2,
-      "data": "B1"
-    },
-    {
-      "id": 3,
-      "data": "B2"
-    },
-    {
-      "id": 4,
-      "data": "C1"
-    },
-    {
-      "id": 5,
-      "data": "C2"
-    }
-  ],
   "estudios": [
     { "id": 0, "data": "Primario" },
     { "id": 1, "data": "Secundario" },
@@ -55,12 +29,6 @@
     { "id": 8, "data": "Posgrado en curso" },
     { "id": 9, "data": "Posgrado en suspenso" },
     { "id": 10, "data": "Posgrado completo" }
-  ],
-  "tiempo": [
-    { "id": 0, "data": "En Formación"},
-    { "id": 1, "data": "0 - 6 meses"},
-    { "id": 2, "data": "2 años" },
-    { "id": 3, "data": "mas de 5 años"}
   ],
   "sistemasOperativos": [
     { "id": 0, "data": "LINUX" },
