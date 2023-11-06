@@ -65,22 +65,30 @@
     {
       "id": 1,
       "data": {
+        "sistema01":{
         "sistemaOp01": { "id": 1, "data": "WINDOWS" },
         "nivel01": { "id": 1, "data": "Intermedio" },
         "tiempo01": { "id": 3, "data": "mas de 5 años" },
         "comentarios01": "Certificado.pdf",
+        },
+        "sistema02" :{
         "sistemaOp02": { "id": 8, "data": "NGINX" },
         "nivel02": { "id": 0, "data": "Inicial" },
         "tiempo02": { "id": 1, "data": "0 - 6 meses" },
         "comentarios02": "Curso Online",
+        },
+        "sistema03":{
         "sistemaOp03": null,
         "nivel03": null,
         "tiempo03": null,
         "comentarios03": null,
+        },
+        "otro":{
         "OtroSop": "Otro",
         "nivelOtro": null,
         "tiempo04": null,
         "comentarios04": null
+        }
       }
     }
   ]
