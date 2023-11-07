@@ -5,7 +5,7 @@ export const nivel = [
     { id: 3, data: "Certificado" },
 ]
 
-export const nivelInglesBritanico = [
+export const nivelInglesBritanicoTxt = [
     { id: 0, data: "A1" },
     { id: 1, data: "A2" },
     { id: 2, data: "B1" },
@@ -27,6 +27,16 @@ export const estudios = [
     { id: 9, data: "Posgrado en suspenso" },
     { id: 10, data: "Posgrado completo" },
 ]
+
+export const tiempo = [
+    { id: 0, data: "En formación" },
+    { id: 1, data: "0 - 6 meses" },
+    { id: 2, data: "1 año" },
+    { id: 3, data: "2 años" },
+    { id: 4, data: "3 años" },
+    { id: 5, data: "más de 5 años" },
+]
+
 
 export const sistemasOperativos = [
     { id: 0, data: "LINUX" },

@@ -1,13 +1,21 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+//Meterial UI
+import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+
+//Fonts
 import '@fontsource/roboto';
+
+//Components
 import Form from './Components/Form.js';
 
+//Redux
+import { Provider } from 'react-redux';
+import store from './redux/store.js';
+
 //Creamos en Tema para la aplicacion customizando MUI
-const theme = createMuiTheme({
+const theme = createTheme({
     typography: {
         "textAlign": 'left',
-        /* htmlFontSize: 15, */
     },
     palette: {
         primary: {
@@ -27,9 +35,11 @@ const theme = createMuiTheme({
 })
 function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <Form/>
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <Form />
+            </ThemeProvider>
+        </Provider>
     );
 }
 
