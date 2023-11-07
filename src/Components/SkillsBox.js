@@ -9,9 +9,10 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+//Components
 import SkillsGrid from './SkillsGrid.js'
 import DividerBar from './DividerBar.js';
+import CustomLoading from './CustomLoading.js'
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -47,22 +48,17 @@ export default function SkillsBox(props) {
 
     //Get State
     const personaSkills = useSelector(state => state.personalData.personaSkills);
-    const error = useSelector(state => state.error);
-    const loading = useSelector(state => state.loading);
-/*     useEffect(()=>{
-        console.log('skillsbox log :'+ personaSkills)
-        
-        if (personaSkills && personaSkills.data && Object.keys(personaSkills.data).length > 0){
-            console.log(personaSkills.data.sistema01 )
-            console.log(personaSkills.data.sistema01.nivel.id)
-        }
-    },[personaSkills]) */
+    const errorSkillsData = useSelector(state => state.personalData.errorSkillsData);
+    const loading = useSelector(state => state.personalData.loading);
+
     return (
             <div className={classes.box}>
-            {console.log(personaSkills.data)}
-            
+                {/* //Barra devisión Competencias */}
                 <DividerBar/>
-                {mainSkills.map(skill => (
+                {loading ?
+                    <CustomLoading loading={loading} />
+                : 
+                mainSkills.map(skill => (
                     <Accordion key={skill} className={classes.heading}>
                         <AccordionSummary
                             key={skill}
@@ -73,14 +69,16 @@ export default function SkillsBox(props) {
                             <Typography key={skill} className={classes.headingtxt}>{skill}</Typography>
                         </AccordionSummary>
                         <AccordionDetails key={skill} >
+                            {/* //Grilla interna de cada competencia */}
                             <SkillsGrid key={skill}
                                 data={personaSkills.data && Object.keys(personaSkills.data).length ? personaSkills.data : null }
                                 skill={skill}
+                                error={errorSkillsData}
                             />
                         </AccordionDetails>
                     </Accordion>
-                ))}
-                
+                ))
+                }
             </div>
     )
 }

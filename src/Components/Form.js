@@ -38,9 +38,8 @@ export default function Form() {
 
     //Get State
     const personalInformation = useSelector(state => state.personalData.personalData);
-    const error = useSelector(state => state.personalData.error);
     const loading = useSelector(state => state.personalData.loading);
-
+    
   return (
     <div className={classes.root}>
         {/* //Barra de Navegación principal */}
@@ -48,11 +47,12 @@ export default function Form() {
                 nombre={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data.nombre : '' }
                 apellido={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data.apellido: ''}
             />
+        
         <main className={classes.content}>
             {/* //Informacion personal */} 
             <InitialPersonalData
                 data={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data : null}
-                error={error}
+                /* error={errorPersonalData} */
                 loading={loading}
             />
             {/* //Caja de competencias */}

@@ -6,7 +6,8 @@ import {
     GUARDAR_DATOS_PERSONA_ERROR, */
     DESCARGA_DATOSPERSONALES_OK,
     DESCARGA_DATOSSKILLS_OK,
-    DESCARGA_DATOS_ERROR,
+    DESCARGA_DATOS_PERSONA_ERROR,
+    DESCARGA_DATOS_SKILLS_ERROR,
     COMENZAR_DESCARGA_DATOS
 } from '../types.js'
 
@@ -52,12 +53,12 @@ export function getPersonalSkills() {
                         })
                 } else {
                     console.log(response.status)
-                    dispatch(downloadPersonalDataError())
+                    dispatch(downloadSkillsDataError())
                 }
             })
             .catch(err => {
                 console.log(err)
-                dispatch(downloadPersonalDataError())
+                dispatch(downloadSkillsDataError())
             })
     }
 }
@@ -75,6 +76,10 @@ const downloadPersonalDataOK = data => ({
     payload: data
 })
 const downloadPersonalDataError = () => ({
-    type: DESCARGA_DATOS_ERROR,
+    type: DESCARGA_DATOS_PERSONA_ERROR,
+    payload: true
+});
+const downloadSkillsDataError = () => ({
+    type: DESCARGA_DATOS_SKILLS_ERROR,
     payload: true
 });
