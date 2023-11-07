@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CustomSelect from './CustomSelect.js'
@@ -6,7 +6,8 @@ import TextField from '@material-ui/core/Input';
 import Typography from '@material-ui/core/Typography';
 
 import { sistemasOperativos, nivel, tiempo } from '../Utils/data.js'
-import {mainSkills} from '../Utils/consts.js'
+//Components
+import CustomErrorAlert from './CustomErrorAlert.js';
 import UploadButton from '../Components/UploadButton.js'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,68 +29,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SkillsGrid(props) {
     const classes = useStyles();
-    const { skill, data } = props;
+    const { data, skill, error } = props;
 
-    /*    function FormRow(props1) {
-           const {values} = props1
-           return (
-               <React.Fragment>
-                  {console.log(values)}
-                   <Grid item xs={3}>
-                                                {index == 2 ?
-                                
-                               <TextField fullWidth placeholder="Otro"
-                               type='text'
-                               value={sistema.sistemaOp}
-                               className={classes.input} />
-                           : 
-                       <CustomSelect
-                           label=''
-                           value={values.sistemaOp && values.sistemaOp.id ? values.sistemaOp.id : null}
-                           objects={sistemasOperativos}
-                           typographySize='body2'
-                       />
-   
-                        }  
-                   </Grid>
-   
-                   <Grid item xs={2}>
-                       <CustomSelect
-                           label=''
-                           value={values.nivel ? values.nivel.id : null}
-                           objects={nivel}
-                           typographySize='body2'
-                       />
-                   </Grid>
-                   <Grid item xs={2}>
-                       <CustomSelect
-                           label=''
-                           value={values.tiempo ? values.tiempo.id : null}
-                           objects={tiempo}
-                           typographySize='body2'
-                       />
-                   </Grid>
-                   <Grid item xs={3}>
-                       <TextField fullWidth placeholder="Comentarios"
-                           type='text'
-                           value={values.comentarios != null ? values.comentarios : ""}
-                           className={classes.input} />
-                   </Grid>
-                   <Grid item xs={2} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                       <UploadButton label='Adjuntar' />
-                   </Grid>
-   
-   
-   
-               </React.Fragment>
-           );
-       } */
-       const [textValues, setTextValues] = useState('');
-       const handleTextChange = (index, value) => {
+    const [textValues, setTextValues] = useState('');
+    const handleTextChange = (index, value) => {
         const updatedValues = [...textValues];
         updatedValues[index] = value;
         setTextValues(updatedValues);
-      };
+    };
     return (
         <Grid container
             direction="row"
@@ -98,25 +45,29 @@ export default function SkillsGrid(props) {
             spacing={1}>
             <Grid item xs={2} className={classes.placeholder}></Grid>
             <Grid item xs={10} >
-                {!data ?
+            {error ?
+                <Grid >
+                    <CustomErrorAlert/>
+                </Grid >
+                :
+                !data ?
                     <Typography style={{ backgroundColor: "white", textAlign: 'center' }} variant="h3" >No hay Datos... </Typography>
                     :
-
                     Object.values(data).map((sistema, index) => (
-                        
-                        <Grid item xs={12} style={{ display: 'flex' }} key={Object.keys(data)[index]+skill} >
+
+                        <Grid item xs={12} style={{ display: 'flex' }} key={Object.keys(data)[index] + skill} >
                             <Grid item xs={3} >
                                 {index === (Object.keys(data).length - 1) ?
                                     <TextField fullWidth placeholder="Comentarios"
-                                        key={Object.keys(data)+index+skill}
-                                        className={classes.input} 
-                                        value={textValues[index]} 
+                                        key={Object.keys(data) + index + skill}
+                                        className={classes.input}
+                                        value={textValues[index]}
                                         defaultValue={sistema.sistemaOp != null ? sistema.sistemaOp : ""}
-                                        onChange = {(e) => handleTextChange(index, e.target.value)}
-                                        />
+                                        onChange={(e) => handleTextChange(index, e.target.value)}
+                                    />
                                     :
                                     <CustomSelect
-                                        key={Object.keys(data)+index+skill}
+                                        key={Object.keys(data) + index + skill}
                                         label=''
                                         value={sistema.sistemaOp && sistema.sistemaOp.id ? sistema.sistemaOp.id : null}
                                         objects={sistemasOperativos}
@@ -127,7 +78,7 @@ export default function SkillsGrid(props) {
 
                             <Grid item xs={2}>
                                 <CustomSelect
-                                    key={Object.keys(data)+index+skill}
+                                    key={Object.keys(data) + index + skill}
                                     label=''
                                     value={sistema.nivel ? sistema.nivel.id : null}
                                     objects={nivel}
@@ -136,7 +87,7 @@ export default function SkillsGrid(props) {
                             </Grid>
                             <Grid item xs={2}>
                                 <CustomSelect
-                                    key={Object.keys(data)+index+skill}
+                                    key={Object.keys(data) + index + skill}
                                     label=''
                                     value={sistema.tiempo ? sistema.tiempo.id : null}
                                     objects={tiempo}
@@ -145,14 +96,14 @@ export default function SkillsGrid(props) {
                             </Grid>
                             <Grid item xs={3}>
                                 <TextField fullWidth placeholder="Comentarios"
-                                    key={Object.keys(data)+index+skill}
+                                    key={Object.keys(data) + index + skill}
                                     type='text'
                                     value={sistema.comentarios != null ? sistema.comentarios : ""}
                                     className={classes.input} />
                             </Grid>
                             <Grid item xs={2} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <UploadButton
-                                    key={Object.keys(data)+index+skill}
+                                    key={Object.keys(data) + index + skill}
                                     label='Adjuntar' />
                             </Grid>
                         </Grid>

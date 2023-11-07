@@ -5,7 +5,8 @@ import {
         GUARDAR_DATOS_PERSONA_ERROR, */
     DESCARGA_DATOSPERSONALES_OK,
     DESCARGA_DATOSSKILLS_OK,
-    DESCARGA_DATOS_ERROR,
+    DESCARGA_DATOS_PERSONA_ERROR,
+    DESCARGA_DATOS_SKILLS_ERROR,
     COMENZAR_DESCARGA_DATOS
 } from '../types.js'
 
@@ -13,7 +14,8 @@ const initialState = {
 
     personalData: [],
     personaSkills: [],
-    error: null,
+    errorPersonalData: null,
+    errorSkillsData:null,
     loading: false,
 
 }
@@ -25,24 +27,30 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: action.payload
             }
-        case DESCARGA_DATOS_ERROR:
+        case DESCARGA_DATOS_SKILLS_ERROR:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                errorSkillsData: action.payload
+            }
+        case DESCARGA_DATOS_PERSONA_ERROR:
+            return {
+                ...state,
+                loading: false,
+                errorPersonalData: action.payload
             }
         case DESCARGA_DATOSPERSONALES_OK:
             return {
                 ...state,
                 loading: false,
-                error: null,
+                errorPersonalData: null,
                 personalData: action.payload
             }
         case DESCARGA_DATOSSKILLS_OK:
             return {
                 ...state,
                 loading: false,
-                error: null,
+                errorSkillsData: null,
                 personaSkills: action.payload
             }
         default:

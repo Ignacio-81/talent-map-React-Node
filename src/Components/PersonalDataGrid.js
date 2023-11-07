@@ -1,17 +1,20 @@
 import {useState} from 'react'
-
+import { useSelector } from 'react-redux';
+//Material
 import CustomSelect from './CustomSelect.js'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-import { nivel, nivelInglesBritanicoTxt, estudios } from '../Utils/data.js'
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
 import UploadButton from '../Components/UploadButton.js'
+//Components
+import CustomErrorAlert from './CustomErrorAlert.js';
+import CustomLoading from './CustomLoading.js'
 
+//Data and constants
 import { txtPersonalData, URL_TEST_INGLES } from '../Utils/consts.js'
+import { nivel, nivelInglesBritanicoTxt, estudios } from '../Utils/data.js'
 
 const useStyles = makeStyles((theme) => ({
     label: {
@@ -33,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
 export default function PersonalDataGrid(props) {
     const classes = useStyles();
 
-    const { data, error, loading } = props;
+    const { data, loading } = props;
+    
+    const errorPersonalData = useSelector(state => state.personalData.errorPersonalData);
     const [textValues, setTextValues] = useState('');
     const handleTextChange = (index, value) => {
         const updatedValues = [...textValues];
@@ -43,19 +48,16 @@ export default function PersonalDataGrid(props) {
     return (
         //Container general 
         <>
-            {error ?
+            {errorPersonalData ?
                 <Grid >
-                    < Typography style={{ backgroundColor: "red", textAlign: 'center' }} variant="h3" >ERRROR </Typography>
+                    <CustomErrorAlert/>
                 </Grid >
                 :
                 loading ?
-                    <Grid item xs={9}>
-                        <Typography style={{ backgroundColor: "green", textAlign: 'center' }} variant="h3" >Cargando... </Typography>
-                    </Grid>
-                    : null}
-
-            {!data ?
-                <Typography style={{ backgroundColor: "green", textAlign: 'center' }} variant="h3" >No hay Datos... </Typography>
+                    <CustomLoading loading={loading} />
+                : 
+            !data ?
+                <Typography style={{ backgroundColor: "green", textAlign: 'center' }} variant="h5" >No hay Datos... </Typography>
                 :
                 <>
                     <Grid container>

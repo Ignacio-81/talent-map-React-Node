@@ -11,7 +11,7 @@ import nulle from '../images/nulle.png'
 //Components
 import PersonalDataGrid from './PersonalDataGrid.js';
 
-import { URL_TUTORIAL} from '../Utils/consts.js';
+import { URL_TUTORIAL } from '../Utils/consts.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InitialPersonalData(props) {
     const classes = useStyles();
-    const {data, error, loading} = props;
+    const { data, loading } = props;
     return (
         <div>
             <Grid
@@ -50,30 +50,30 @@ export default function InitialPersonalData(props) {
             >
 
                 <Grid item>
-                <Card className={classes.card}>
-                    <CardActionArea>
-                        <CardMedia
-                            className={classes.media}
-                            image={nulle}
-                            title="Null-e"
-                        />
-                    </CardActionArea>
-                    <CardActions>
-                        <Button variant="contained" size="medium" color="primary"
-                            target="_blank" rel="noopener noreferrer"
-                            href={URL_TUTORIAL}>
-                            TUTORIAL
-                        </Button>
-                    </CardActions>
-                </Card>
+                    <Card className={classes.card}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image={nulle}
+                                title="Null-e"
+                            />
+                        </CardActionArea>
+                        <CardActions>
+                            <Button variant="contained" size="medium" color="primary"
+                                target="_blank" rel="noopener noreferrer"
+                                href={URL_TUTORIAL}>
+                                TUTORIAL
+                            </Button>
+                        </CardActions>
+                    </Card>
                 </Grid>
-            <Grid item xs={9}> 
-                <PersonalDataGrid
-                data={data}
-                error={error}
-                loading={loading}
-                />
-            </Grid>
+                <Grid item xs={9}>
+                    <PersonalDataGrid
+                        data={data}
+                        /* error={error} */
+                        loading={loading}
+                    />
+                </Grid>
             </Grid>
         </div>
     )
