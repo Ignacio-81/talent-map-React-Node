@@ -1,39 +1,23 @@
 {
   "nivel": [
     {
-      "id": 0,"data": "Inicial"
+      "id": 0,
+      "data": "Inicial"
     },
     {
-      "id": 1, "data": "Intermedio"
+      "id": 1,
+      "data": "Intermedio"
     },
     {
-      "id": 2, "data": "Avanzado"
+      "id": 2,
+      "data": "Avanzado"
     },
     {
-      "id": 3, "data": "Certificado"
+      "id": 3,
+      "data": "Certificado"
     }
   ],
-  "nivelInglesBritanico": [
-    { 
-        "id": 0, "data": "A1" 
-    },
-    { 
-        "id": 1, "data": "A2" 
-    },
-    { 
-        "id": 2, "data": "B1" 
-    },
-    { 
-        "id": 3, "data": "B2" 
-    },
-    { 
-        "id": 4, "data": "C1" 
-    },
-    { 
-        "id": 5, "data": "C2" 
-    }
-  ],
-  "estudios" : [
+  "estudios": [
     { "id": 0, "data": "Primario" },
     { "id": 1, "data": "Secundario" },
     { "id": 2, "data": "Terciario" },
@@ -45,9 +29,8 @@
     { "id": 8, "data": "Posgrado en curso" },
     { "id": 9, "data": "Posgrado en suspenso" },
     { "id": 10, "data": "Posgrado completo" }
-],
-
-"sistemasOperativos" : [
+  ],
+  "sistemasOperativos": [
     { "id": 0, "data": "LINUX" },
     { "id": 1, "data": "WINDOWS" },
     { "id": 2, "data": "UBUNTU SERVER" },
@@ -58,5 +41,55 @@
     { "id": 7, "data": "HTTP SERVER ORACLE OHS" },
     { "id": 8, "data": "NGINX" },
     { "id": 9, "data": "TOMCAT" }
-]
+  ],
+  "datosPersonales": [
+    {
+      "id": 1,
+      "data": {
+        "nombre": "Ignacio",
+        "apellido": "Badella",
+        "legajo": 358,
+        "fechaDeIngreso": "2021-06-01",
+        "puesto": "Developer",
+        "seniority": "Jr",
+        "estudioMaximoAlcanzado": { "id": 7, "data": "Universitario completo" },
+        "cv": "ignaciobadella.pdf",
+        "nivelDeIngles": { "id": 2, "data": "Avanzado" },
+        "nivelInglesBritanico": null,
+        "certificadoIngles": null,
+        "nivelMetAgiles": { "id": 2, "data": "Avanzado" }
+      }
+    }
+  ],
+  "skillsPersonales": [
+    {
+      "id": 1,
+      "data": {
+        "sistema01": {
+          "sistemaOp": { "id": 1, "data": "WINDOWS" },
+          "nivel": { "id": 1, "data": "Intermedio" },
+          "tiempo": { "id": 3, "data": "mas de 5 años" },
+          "comentarios": "Certificado.pdf"
+        },
+        "sistema02": {
+          "sistemaOp": { "id": 8, "data": "NGINX" },
+          "nivel": { "id": 0, "data": "Inicial" },
+          "tiempo": { "id": 1, "data": "0 - 6 meses" },
+          "comentarios": "Curso Online"
+        },
+        "sistema03": {
+          "sistemaOp": null,
+          "nivel": null,
+          "tiempo": null,
+          "comentarios": null
+        },
+        "otro": {
+          "OtroSop": "Otro",
+          "nivelOtro": null,
+          "tiempo": null,
+          "comentarios": null
+        }
+      }
+    }
+  ]
 }

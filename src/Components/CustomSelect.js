@@ -38,7 +38,6 @@ export default function CustomSelect(props) {
 
   const handleChange = (event) => {
     setSelection(event.target.value)
-    console.log (event.target.value)
   };
 
   return (

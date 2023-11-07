@@ -28,6 +28,16 @@ export const estudios = [
     { id: 10, data: "Posgrado completo" },
 ]
 
+export const tiempo = [
+    { id: 0, data: "En formación" },
+    { id: 1, data: "0 - 6 meses" },
+    { id: 2, data: "1 año" },
+    { id: 3, data: "2 años" },
+    { id: 4, data: "3 años" },
+    { id: 5, data: "más de 5 años" },
+]
+
+
 export const sistemasOperativos = [
     { id: 0, data: "LINUX" },
     { id: 1, data: "WINDOWS" },

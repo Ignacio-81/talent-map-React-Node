@@ -1,3 +1,4 @@
+import {useState} from 'react'
 
 import CustomSelect from './CustomSelect.js'
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,12 +30,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 export default function PersonalDataGrid(props) {
     const classes = useStyles();
 
     const { data, error, loading } = props;
-
+    const [textValues, setTextValues] = useState('');
+    const handleTextChange = (index, value) => {
+        const updatedValues = [...textValues];
+        updatedValues[index] = value;
+        setTextValues(updatedValues);
+      };
     return (
         //Container general 
         <>
@@ -53,7 +58,6 @@ export default function PersonalDataGrid(props) {
                 <Typography style={{ backgroundColor: "green", textAlign: 'center' }} variant="h3" >No hay Datos... </Typography>
                 :
                 <>
-                   {console.log('Pesonal Data grid '+ JSON.stringify(data.nivelDeIngles)+ typeof(data))}
                     <Grid container>
                         <Grid item container={true} direction="row" alignItems="flex-end" >
                             {/* LABEL TEXT */}
@@ -68,8 +72,13 @@ export default function PersonalDataGrid(props) {
                                 alignItems="flex-start"
                             >
                             {
-                                Object.values(data).slice(2,6).map( (value) =>
-                                <TextField key={value} value={value} fullWidth />
+                                Object.values(data).slice(2,6).map( (txt,index) =>
+                                <TextField key={Object.keys(data)[index]} 
+                                value={textValues[index]} 
+                                defaultValue={txt}
+                                fullWidth 
+                                onChange = {(e) => handleTextChange(index, e.target.value)}
+                                />
                             )}
                                 <Grid xs={3} item container={true} direction="row" justifyContent="center" >
                                     <CustomSelect

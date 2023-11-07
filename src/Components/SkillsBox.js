@@ -1,4 +1,7 @@
-import React from 'react'
+import { useEffect } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { getPersonalSkills } from '../redux/actions/personalDataActions.js'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -35,8 +38,29 @@ const useStyles = makeStyles((theme) => ({
 export default function SkillsBox(props) {
     const { mainSkills, skills, period, description, link } = props
     const classes = useStyles();
+    const dispatch = useDispatch();
+    //Get information on component Load
+    useEffect(() => {
+        const getPersonalSkillsInfo = () => dispatch(getPersonalSkills());
+        getPersonalSkillsInfo();
+    }, [])
+
+    //Get State
+    const personaSkills = useSelector(state => state.personalData.personaSkills);
+    const error = useSelector(state => state.error);
+    const loading = useSelector(state => state.loading);
+/*     useEffect(()=>{
+        console.log('skillsbox log :'+ personaSkills)
+        
+        if (personaSkills && personaSkills.data && Object.keys(personaSkills.data).length > 0){
+            console.log(personaSkills.data.sistema01 )
+            console.log(personaSkills.data.sistema01.nivel.id)
+        }
+    },[personaSkills]) */
     return (
             <div className={classes.box}>
+            {console.log(personaSkills.data)}
+            
                 <DividerBar/>
                 {mainSkills.map(skill => (
                     <Accordion key={skill} className={classes.heading}>
@@ -49,10 +73,14 @@ export default function SkillsBox(props) {
                             <Typography key={skill} className={classes.headingtxt}>{skill}</Typography>
                         </AccordionSummary>
                         <AccordionDetails key={skill} >
-                            <SkillsGrid key={skill}/>
+                            <SkillsGrid key={skill}
+                                data={personaSkills.data && Object.keys(personaSkills.data).length ? personaSkills.data : null }
+                                skill={skill}
+                            />
                         </AccordionDetails>
                     </Accordion>
                 ))}
+                
             </div>
     )
 }
