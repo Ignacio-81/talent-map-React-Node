@@ -65,29 +65,23 @@
     {
       "id": 1,
       "data": {
-        "sistema01": {
-          "sistemaOp": { "id": 1, "data": "WINDOWS" },
-          "nivel": { "id": 1, "data": "Intermedio" },
-          "tiempo": { "id": 3, "data": "mas de 5 años" },
-          "comentarios": "Certificado.pdf"
+        "sistema01":{
+        "sistemaOp": { "id": 1, "data": "WINDOWS" },
+        "nivel": { "id": 1, "data": "Intermedio" },
+        "tiempo": { "id": 3, "data": "mas de 5 años" },
+        "comentarios": "Certificado.pdf"
         },
-        "sistema02": {
-          "sistemaOp": { "id": 8, "data": "NGINX" },
-          "nivel": { "id": 0, "data": "Inicial" },
-          "tiempo": { "id": 1, "data": "0 - 6 meses" },
-          "comentarios": "Curso Online"
+        "sistema02" :{
+        "sistemaOp": { "id": 8, "data": "NGINX" },
+        "nivel": { "id": 0, "data": "Inicial" },
+        "tiempo": { "id": 1, "data": "0 - 6 meses" },
+        "comentarios": "Curso Online"
         },
-        "sistema03": {
-          "sistemaOp": null,
-          "nivel": null,
-          "tiempo": null,
-          "comentarios": null
-        },
-        "otro": {
-          "OtroSop": "Otro",
-          "nivelOtro": null,
-          "tiempo": null,
-          "comentarios": null
+        "otro":{
+        "sistemaOp": "Otro",
+        "nivel": null,
+        "tiempo": null,
+        "comentarios": null
         }
       }
     }
