@@ -2,38 +2,46 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     toolbar: {
-		height: '60px',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
+        height: '60px',
+        display: 'flex',
+        alignItems: 'center',
+    },
     menuButton: {
-      marginRight: theme.spacing(2),
+        marginRight: theme.spacing(2),
     },
     text: {
-        textAlign: 'middle',
+        flexGrow: 1,
+        textAlign: 'center',
         fontWeight: 'bold',
         letterSpacing: 10,
         fontSize: 40
     },
-  }));
+}));
 
 export default function MainBar(props) {
     const classes = useStyles();
-    const {nombre, apellido} = props;
+    const { nombre, apellido } = props;
     return (
-          <AppBar>
-            <Toolbar className={classes.toolbar}>
-              <Typography className={classes.text} >{`${nombre} ${apellido}`}</Typography>
-            </Toolbar>
-          </AppBar>
+        <div >
+            <AppBar>
+                <Toolbar className={classes.toolbar}>
+                    <Typography className={classes.text} >{`${nombre} ${apellido}`}</Typography>
+                    <Button variant="contained"
+                        size="large"
+                        className={classes.menuButton}
+                        startIcon={<SaveIcon />}>GUARDAR</Button>
+                </Toolbar>
+            </AppBar>
+        </div>
     );
-  }
+}
 
