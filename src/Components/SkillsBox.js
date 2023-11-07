@@ -16,7 +16,7 @@ import CustomLoading from './CustomLoading.js'
 
 const useStyles = makeStyles((theme) => ({
     box: {
-        display:'flex',
+        display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         margin: '1vw',
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SkillsBox(props) {
-    const { mainSkills, skills, period, description, link } = props
+    const { mainSkills } = props
     const classes = useStyles();
     const dispatch = useDispatch();
     //Get information on component Load
@@ -52,12 +52,12 @@ export default function SkillsBox(props) {
     const loading = useSelector(state => state.personalData.loading);
 
     return (
-            <div className={classes.box}>
-                {/* //Barra devisión Competencias */}
-                <DividerBar/>
-                {loading ?
-                    <CustomLoading loading={loading} />
-                : 
+        <div className={classes.box}>
+            {/* //Barra devisión Competencias */}
+            <DividerBar />
+            {loading ?
+                <CustomLoading loading={loading} />
+                :
                 mainSkills.map(skill => (
                     <Accordion key={skill} className={classes.heading}>
                         <AccordionSummary
@@ -71,14 +71,14 @@ export default function SkillsBox(props) {
                         <AccordionDetails key={skill} >
                             {/* //Grilla interna de cada competencia */}
                             <SkillsGrid key={skill}
-                                data={personaSkills.data && Object.keys(personaSkills.data).length ? personaSkills.data : null }
+                                data={personaSkills.data && Object.keys(personaSkills.data).length ? personaSkills.data : null}
                                 skill={skill}
                                 error={errorSkillsData}
                             />
                         </AccordionDetails>
                     </Accordion>
                 ))
-                }
-            </div>
+            }
+        </div>
     )
 }

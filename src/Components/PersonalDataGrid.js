@@ -1,160 +1,141 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux';
 //Material
 import CustomSelect from './CustomSelect.js'
-import { makeStyles } from '@material-ui/core/styles';
+
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import UploadButton from '../Components/UploadButton.js'
 //Components
 import CustomErrorAlert from './CustomErrorAlert.js';
 import CustomLoading from './CustomLoading.js'
+import CustomLabels from './CustomLabels.js'
 
-//Data and constants
+//Data & Contants
 import { txtPersonalData, URL_TEST_INGLES } from '../Utils/consts.js'
 import { nivel, nivelInglesBritanicoTxt, estudios } from '../Utils/data.js'
 
-const useStyles = makeStyles((theme) => ({
-    label: {
-        width: 260,
-        /* padding: theme.spacing(2), */
-        color: theme.palette.textColor.text1,
-    },
-    label2: {
-        /* padding: theme.spacing(2), */
-        backgroundColor: theme.palette.secondary.main,
-        color: theme.palette.textColor.text2,
-        textAlign: 'center',
-        margin: '2px',
-    },
-
-}));
-
-
 export default function PersonalDataGrid(props) {
-    const classes = useStyles();
-
     const { data, loading } = props;
-    
+
     const errorPersonalData = useSelector(state => state.personalData.errorPersonalData);
     const [textValues, setTextValues] = useState('');
     const handleTextChange = (index, value) => {
         const updatedValues = [...textValues];
         updatedValues[index] = value;
         setTextValues(updatedValues);
-      };
+    };
     return (
         //Container general 
         <>
             {errorPersonalData ?
                 <Grid >
-                    <CustomErrorAlert/>
+                    <CustomErrorAlert />
                 </Grid >
                 :
                 loading ?
                     <CustomLoading loading={loading} />
-                : 
-            !data ?
-                <Typography style={{ backgroundColor: "green", textAlign: 'center' }} variant="h5" >No hay Datos... </Typography>
-                :
-                <>
-                    <Grid container>
-                        <Grid item container={true} direction="row" alignItems="flex-end" >
-                            {/* LABEL TEXT */}
-                            <Grid item>
-                                {txtPersonalData.slice(0, 6).map(txt => (
-                                    <Typography key={txt} className={classes.label} variant="h6" >{txt}</Typography>
-                                ))}
-                            </Grid>
-                            {/* PERSONAL INFORMATION */}
-                            <Grid xs item container={true} direction="column"
-                                justifyContent="flex-start"
-                                alignItems="flex-start"
-                            >
-                            {
-                                Object.values(data).slice(2,6).map( (txt,index) =>
-                                <TextField key={Object.keys(data)[index]} 
-                                value={textValues[index]} 
-                                defaultValue={txt}
-                                fullWidth 
-                                onChange = {(e) => handleTextChange(index, e.target.value)}
-                                />
-                            )}
-                                <Grid xs={3} item container={true} direction="row" justifyContent="center" >
-                                    <CustomSelect
-                                        label='Estudios'
-                                        objects={estudios}
-                                        value={data.estudioMaximoAlcanzado ? data.estudioMaximoAlcanzado.id : null}
-                                        typographySize='body2'
-                                    />
+                    :
+                    !data ?
+                        <CustomLabels noData={true} />
+                        :
+                        <>
+                            <Grid container>
+                                <Grid item container={true} direction="row" alignItems="flex-end" >
+                                    {/* LABEL TEXT */}
+                                    <Grid item>
+                                        {txtPersonalData.slice(0, 6).map(txt => (
+                                            <CustomLabels text={txt} />
+                                        ))}
+                                    </Grid>
+                                    {/* PERSONAL INFORMATION */}
+                                    <Grid xs item container={true} direction="column"
+                                        justifyContent="flex-start"
+                                        alignItems="flex-start"
+                                    >
+                                        {
+                                            Object.values(data).slice(2, 6).map((txt, index) =>
+                                                <TextField key={Object.keys(data)[index]}
+                                                    value={textValues[index]}
+                                                    defaultValue={txt}
+                                                    fullWidth
+                                                    onChange={(e) => handleTextChange(index, e.target.value)}
+                                                />
+                                            )}
+                                        <Grid xs={3} item container={true} direction="row" justifyContent="center" >
+                                            <CustomSelect
+                                                label='Estudios'
+                                                objects={estudios}
+                                                value={data.estudioMaximoAlcanzado ? data.estudioMaximoAlcanzado.id : null}
+                                                typographySize='body2'
+                                            />
 
-                                    <UploadButton label='Subi tu CV' />
+                                            <UploadButton label='Subi tu CV' />
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Grid>
 
-                        <Grid container >
-                            {/* IDIOMAS */}
-                            <Grid item xs={12}>
-                                <Typography className={classes.label2} variant="h6" >{txtPersonalData[6]}</Typography>
-                            </Grid>
+                                <Grid container >
+                                    {/* IDIOMAS */}
+                                    <Grid item xs={12}>
+                                        <CustomLabels text={txtPersonalData[6]} titulo={true} />
+                                    </Grid>
 
-                            <Grid item container={true} direction="row"
-                                justifyContent="space-between"
-                                alignItems="center">
-                                <Typography className={classes.label} variant="h6" >{txtPersonalData[7]}</Typography>
-                                <Grid item xs>
-                                    <CustomSelect
-                                        label={txtPersonalData[7]}
-                                        objects={nivel}
-                                        value={data.nivelDeIngles ? data.nivelDeIngles.id : null}
-                                        typographySize='body2'
-                                    />
+                                    <Grid item container={true} direction="row"
+                                        justifyContent="space-between"
+                                        alignItems="center">
+                                        <CustomLabels text={txtPersonalData[7]} />
+                                        <Grid item xs>
+                                            <CustomSelect
+                                                label='nivel-ingles'
+                                                objects={nivel}
+                                                value={data.nivelDeIngles ? data.nivelDeIngles.id : null}
+                                                typographySize='body2'
+                                            />
+                                        </Grid>
+                                        <Grid item xs>
+                                            <CustomSelect
+                                                label='nivel-ingles-britanico'
+                                                objects={nivelInglesBritanicoTxt}
+                                                value={data.nivelInglesBritanico ? data.nivelInglesBritanico.id : null}
+                                                typographySize='body2'
+                                            />
+                                        </Grid>
+                                        <Grid item xs style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                            <Button size="small" variant="contained"
+                                                target="_blank" rel="noopener noreferrer"
+                                                href={URL_TEST_INGLES}>
+                                                TEST
+                                            </Button>
+                                        </Grid>
+                                        <Grid item xs style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                            <UploadButton label='Adjuntar' />
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs>
-                                    <CustomSelect
-                                        label='Nivel Ingles Britanico'
-                                        objects={nivelInglesBritanicoTxt}
-                                        value={data.nivelInglesBritanico ? data.nivelInglesBritanico.id : null}
-                                        typographySize='body2'
-                                    />
-                                </Grid>
-                                <Grid item xs style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                    <Button size="small" variant="contained"
-                                        target="_blank" rel="noopener noreferrer"
-                                        href={URL_TEST_INGLES}>
-                                        TEST
-                                    </Button>
-                                </Grid>
-                                <Grid item xs style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                    <UploadButton label='Adjuntar' />
+                                <Grid container >
+                                    {/* METODOLOGIAS AGILES */}
+                                    <Grid item xs={12}>
+                                        <CustomLabels text={txtPersonalData[8]} titulo={true} />
+                                    </Grid>
+                                    <Grid item container={true} direction="row"
+                                        justifyContent="flex-start"
+                                        alignItems="center">
+                                        <CustomLabels text={txtPersonalData[9]} />
+                                        <Grid item xs={3}>
+                                            <CustomSelect
+                                                label={txtPersonalData[9]}
+                                                objects={nivel}
+                                                value={data.nivelMetAgiles ? data.nivelMetAgiles.id : null}
+                                                typographySize='body2'
+                                            />
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid container >
-                            {/* METODOLOGIAS AGILES */}
-                            <Grid item xs={12}>
-                                <Typography className={classes.label2} variant="h6" >{txtPersonalData[8]}</Typography>
-                            </Grid>
-                            <Grid item container={true} direction="row"
-                                justifyContent="flex-start"
-                                alignItems="center">
-                                <Typography className={classes.label} variant="h6" >{txtPersonalData[9]}</Typography>
-                                <Grid item xs={3}>
-                                    <CustomSelect
-                                        label={txtPersonalData[9]}
-                                        objects={nivel}
-                                        value={data.nivelMetAgiles ? data.nivelMetAgiles.id : null}
-                                        typographySize='body2'
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </>}
-
+                        </>}
         </>
     )
 }

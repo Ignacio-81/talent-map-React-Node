@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import nulle from '../images/nulle.png'
 //Components
 import PersonalDataGrid from './PersonalDataGrid.js';
-
+//Data & Contants
 import { URL_TUTORIAL } from '../Utils/consts.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +70,6 @@ export default function InitialPersonalData(props) {
                 <Grid item xs={9}>
                     <PersonalDataGrid
                         data={data}
-                        /* error={error} */
                         loading={loading}
                     />
                 </Grid>
