@@ -18,14 +18,32 @@ import { txtPersonalData, URL_TEST_INGLES } from '../Utils/consts.js'
 import { nivel, nivelInglesBritanicoTxt, estudios } from '../Utils/data.js'
 
 export default function PersonalDataGrid(props) {
-    const { data, loading } = props;
+    const { data, loading, setRequest, request } = props;
 
     const errorPersonalData = useSelector(state => state.personalData.errorPersonalData);
     const [textValues, setTextValues] = useState('');
     const handleTextChange = (index, value) => {
         const updatedValues = [...textValues];
+        const newRequest = request
         updatedValues[index] = value;
         setTextValues(updatedValues);
+
+        switch (index) {
+            case 0:
+                newRequest.personalData.legajo = Number(updatedValues[index])
+                break;
+            case 1:
+                newRequest.personalData.fechaDeIngreso = updatedValues[index]
+                break;
+            case 2:
+                newRequest.personalData.puesto = updatedValues[index]
+                break;
+            case 3:
+                newRequest.personalData.seniority = updatedValues[index]
+                break;
+        }
+
+        setRequest(newRequest)
     };
     return (
         //Container general 
@@ -38,7 +56,7 @@ export default function PersonalDataGrid(props) {
                 loading ?
                     <CustomLoading loading={loading} />
                     :
-                    !data ?
+                    !request.personalData ?
                         <CustomLabels noData={true} />
                         :
                         <>
@@ -46,8 +64,8 @@ export default function PersonalDataGrid(props) {
                                 <Grid item container={true} direction="row" alignItems="flex-end" >
                                     {/* LABEL TEXT */}
                                     <Grid item>
-                                        {txtPersonalData.slice(0, 6).map(txt => (
-                                            <CustomLabels text={txt} />
+                                        {txtPersonalData.slice(0, 6).map((txt, index) => (
+                                            <CustomLabels key={index} text={txt} />
                                         ))}
                                     </Grid>
                                     {/* PERSONAL INFORMATION */}
@@ -58,8 +76,7 @@ export default function PersonalDataGrid(props) {
                                         {
                                             Object.values(data).slice(2, 6).map((txt, index) =>
                                                 <TextField key={Object.keys(data)[index]}
-                                                    value={textValues[index]}
-                                                    defaultValue={txt}
+                                                    value={textValues[index] ?? txt ?? ""}
                                                     fullWidth
                                                     onChange={(e) => handleTextChange(index, e.target.value)}
                                                 />
@@ -68,8 +85,9 @@ export default function PersonalDataGrid(props) {
                                             <CustomSelect
                                                 label='Estudios'
                                                 objects={estudios}
-                                                value={data.estudioMaximoAlcanzado ? data.estudioMaximoAlcanzado.id : null}
+                                                val={request.personalData.idEstudioMaximoAlcanzado ?? -1}
                                                 typographySize='body2'
+                                                handleChangeSelect={(e) => setRequest({ ...request, personalData: { ...request.personalData, idEstudioMaximoAlcanzado: e.target.value } })}
                                             />
 
                                             <UploadButton label='Subi tu CV' />
@@ -91,16 +109,18 @@ export default function PersonalDataGrid(props) {
                                             <CustomSelect
                                                 label='nivel-ingles'
                                                 objects={nivel}
-                                                value={data.nivelDeIngles ? data.nivelDeIngles.id : null}
+                                                val={request.personalData.idNivelDeIngles ?? -1}
                                                 typographySize='body2'
+                                                handleChangeSelect={(e) => setRequest({ ...request, personalData: { ...request.personalData, idNivelDeIngles: e.target.value } })}
                                             />
                                         </Grid>
                                         <Grid item xs>
                                             <CustomSelect
                                                 label='nivel-ingles-britanico'
                                                 objects={nivelInglesBritanicoTxt}
-                                                value={data.nivelInglesBritanico ? data.nivelInglesBritanico.id : null}
+                                                val={request.personalData.idNivelInglesBritanico ?? -1}
                                                 typographySize='body2'
+                                                handleChangeSelect={(e) => setRequest({ ...request, personalData: { ...request.personalData, idNivelInglesBritanico: e.target.value } })}
                                             />
                                         </Grid>
                                         <Grid item xs style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -128,8 +148,9 @@ export default function PersonalDataGrid(props) {
                                             <CustomSelect
                                                 label={txtPersonalData[9]}
                                                 objects={nivel}
-                                                value={data.nivelMetAgiles ? data.nivelMetAgiles.id : null}
+                                                val={request.personalData.idNivelMetAgiles ?? -1}
                                                 typographySize='body2'
+                                                handleChangeSelect={(e) => setRequest({ ...request, personalData: { ...request.personalData, idNivelMetAgiles: e.target.value } })}
                                             />
                                         </Grid>
                                     </Grid>

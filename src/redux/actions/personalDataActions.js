@@ -1,9 +1,9 @@
-import { URL_GET_DATOS_PERSONALES, URL_GET_SKILLS_PERSONALES } from '../../Utils/consts.js'
+import { URL_GET_DATOS_PERSONALES, URL_GET_SKILLS_PERSONALES, URL_POST_DATOS_PERSONALES } from '../../Utils/consts.js'
 
 import {
-    /* GUARDAR_DATOS_PERSONA,
+    GUARDAR_DATOS_PERSONA,
     GUARDAR_DATOS_PERSONA_OK,
-    GUARDAR_DATOS_PERSONA_ERROR, */
+    GUARDAR_DATOS_PERSONA_ERROR,
     DESCARGA_DATOSPERSONALES_OK,
     DESCARGA_DATOSSKILLS_OK,
     DESCARGA_DATOS_PERSONA_ERROR,
@@ -22,7 +22,7 @@ export function getPersonalData() {
                 if (response.status === 200) {
                     response.json()
                         .then(data => {
-                            console.log('fetch:'+ JSON.stringify(data))
+                            console.log('fetch Personal Data:'+ JSON.stringify(data))
                             dispatch(downloadPersonalDataOK(data))
                         })
                 } else {
@@ -48,7 +48,7 @@ export function getPersonalSkills() {
                 if (response.status === 200) {
                     response.json()
                         .then(data => {
-                            console.log('fetch:'+ JSON.stringify(data))
+                            console.log('fetch skills:'+ JSON.stringify(data))
                             dispatch(downloadPersonalSkillsOK(data))
                         })
                 } else {
@@ -83,3 +83,37 @@ const downloadSkillsDataError = () => ({
     type: DESCARGA_DATOS_SKILLS_ERROR,
     payload: true
 });
+
+//Save Information on the DB
+const savePersonalData = () =>({
+    type: GUARDAR_DATOS_PERSONA,
+    payload: true
+})
+const savePersonalDataOK = (data) => ({
+    type: GUARDAR_DATOS_PERSONA_OK,
+    payload : data
+})
+export const savePersonalDataError = (data) => ({
+    type: GUARDAR_DATOS_PERSONA_ERROR,
+    payload : data
+})
+
+export function updatePersonaInformation (request) {
+    return(async (dispatch) =>{
+        dispatch(savePersonalData())
+        fetch (URL_POST_DATOS_PERSONALES, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(request)
+        })
+        .then((response) => {
+            response.json()
+            .then(data => {
+                data == 200 ? dispatch(savePersonalDataOK(data.body))
+                : dispatch(savePersonalDataError(true))
+            })
+        })
+        .catch(() => dispatch(savePersonalDataError(true)))
+    })
+
+}

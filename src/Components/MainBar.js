@@ -5,7 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
-
+//Redux
+import { useDispatch } from 'react-redux';
+import { updatePersonaInformation } from '../redux/actions/personalDataActions.js'
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -29,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainBar(props) {
     const classes = useStyles();
-    const { nombre, apellido } = props;
+    const { nombre, apellido, request } = props;
+    const dispatch = useDispatch();
     return (
         <div >
             <AppBar>
@@ -38,7 +41,9 @@ export default function MainBar(props) {
                     <Button variant="contained"
                         size="large"
                         className={classes.menuButton}
-                        startIcon={<SaveIcon />}>GUARDAR</Button>
+                        startIcon={<SaveIcon />}
+                        onClick={() => dispatch(updatePersonaInformation(request))}
+                        >GUARDAR</Button>
                 </Toolbar>
             </AppBar>
         </div>

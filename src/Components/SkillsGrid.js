@@ -29,14 +29,53 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SkillsGrid(props) {
     const classes = useStyles();
-    const { data, skill, error } = props;
+    const { data, skill, error, request, setRequest } = props;
 
     const [textValues, setTextValues] = useState('');
-    const handleTextChange = (index, value) => {
+    const [selectSysValues, setselecSystValues] = useState([]);
+    const [selectLevValues, setselectLevValues] = useState([]);
+    const [selectTimeValues, setselectTimeValues] = useState([]);
+
+    const handleTextChange = (index, value, field) => {
+        const newRequest = request
         const updatedValues = [...textValues];
-        updatedValues[index] = value;
+        if (field && field == 'Otro') {
+            newRequest.skills.otro.sistemaOp = value
+            updatedValues[0] = value;
+        } else {
+            index === (Object.keys(request.skills).length - 1)
+                ? newRequest.skills.otro.comentarios = value
+                : newRequest.skills[`sistema0${index + 1}`].comentarios = value
+            updatedValues[index + 1] = value;
+        }
         setTextValues(updatedValues);
     };
+    const handleSelectChange = (index, value, field) => {
+        const newRequest = request
+        let updatedValues
+        switch (field) {
+            case "OpSystem":
+                newRequest.skills[`sistema0${index + 1}`].idSistemaOp = value
+                updatedValues = [...selectSysValues];
+                updatedValues[index] = value;
+                setselecSystValues(updatedValues);
+                break;
+            case "Level":
+                newRequest.skills[`sistema0${index + 1}`].idNivel = value
+                updatedValues = [...selectLevValues];
+                updatedValues[index] = value;
+                setselectLevValues(updatedValues);
+                break;
+            case "Time":
+                newRequest.skills[`sistema0${index + 1}`].idTiempo = value
+                updatedValues = [...selectTimeValues];
+                updatedValues[index] = value;
+                setselectTimeValues(updatedValues);
+                break;
+        }
+        setRequest(newRequest)
+    };
+
     return (
         <Grid container
             direction="row"
@@ -53,57 +92,63 @@ export default function SkillsGrid(props) {
                     !data ?
                         <CustomLabels noData={true} />
                         :
-                        Object.values(data).map((sistema, index) => (
+                        Object.values(request.skills).map((sistema, index) => (
 
-                            <Grid item xs={12} style={{ display: 'flex' }} key={Object.keys(data)[index] + skill} >
+                            <Grid item xs={12} style={{ display: 'flex' }} key={Object.keys(request.skills)[index] + skill} >
                                 <Grid item xs={3} >
-                                    {index === (Object.keys(data).length - 1) ?
+                                    {index === (Object.keys(request.skills).length - 1) ?
                                         <TextField fullWidth placeholder="Comentarios"
-                                            key={Object.keys(data) + index + skill}
+                                            key={Object.keys(request.skills)[index]}
                                             className={classes.input}
-                                            value={textValues[index]}
+                                            value={textValues[0]}
                                             defaultValue={sistema.sistemaOp != null ? sistema.sistemaOp : ""}
-                                            onChange={(e) => handleTextChange(index, e.target.value)}
+                                            onChange={(e) => handleTextChange(index, e.target.value, "Otro")}
                                         />
                                         :
                                         <CustomSelect
-                                            key={Object.keys(data) + index + skill}
-                                            label=''
-                                            value={sistema.sistemaOp && sistema.sistemaOp.id ? sistema.sistemaOp.id : null}
+                                            key={Object.keys(request.skills)[index]}
+                                            label='Sistema Operativo'
+                                            val={selectSysValues[index] ?? sistema.idSistemaOp ?? -1}
                                             objects={sistemasOperativos}
                                             typographySize='body2'
+                                            handleChangeSelect={(e) => handleSelectChange(index, e.target.value, "OpSystem")}
                                         />}
 
                                 </Grid>
 
                                 <Grid item xs={2}>
                                     <CustomSelect
-                                        key={Object.keys(data) + index + skill}
-                                        label=''
-                                        value={sistema.nivel ? sistema.nivel.id : null}
+                                        key={Object.keys(request.skills) + index + skill}
+                                        label='Nivel-Experiencia'
+                                        val={selectLevValues[index] ?? sistema.idNivel ?? -1}
                                         objects={nivel}
                                         typographySize='body2'
+                                        handleChangeSelect={(e) => handleSelectChange(index, e.target.value, "Level")}
                                     />
                                 </Grid>
                                 <Grid item xs={2}>
                                     <CustomSelect
-                                        key={Object.keys(data) + index + skill}
-                                        label=''
-                                        value={sistema.tiempo ? sistema.tiempo.id : null}
+                                        key={Object.keys(request.skills) + index + skill}
+                                        label='Tiempo experiencia'
+                                        val={selectTimeValues[index] ?? sistema.idTiempo ?? -1}
                                         objects={tiempo}
                                         typographySize='body2'
+                                        handleChangeSelect={(e) => handleSelectChange(index, e.target.value, "Time")}
                                     />
                                 </Grid>
                                 <Grid item xs={3}>
                                     <TextField fullWidth placeholder="Comentarios"
-                                        key={Object.keys(data) + index + skill}
+                                        key={Object.keys(request.skills) + index + skill}
                                         type='text'
-                                        value={sistema.comentarios != null ? sistema.comentarios : ""}
-                                        className={classes.input} />
+                                        defaultValue={sistema.comentarios ?? ""}
+                                        value={textValues[index+1]}
+                                        className={classes.input}
+                                        onChange={(e) => handleTextChange(index, e.target.value)}
+                                    />
                                 </Grid>
                                 <Grid item xs={2} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                     <UploadButton
-                                        key={Object.keys(data) + index + skill}
+                                        key={Object.keys(request.skills) + index + skill}
                                         label='Adjuntar' />
                                 </Grid>
                             </Grid>
