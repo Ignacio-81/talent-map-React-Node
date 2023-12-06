@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux';
+
 //Material
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -37,7 +40,29 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InitialPersonalData(props) {
     const classes = useStyles();
-    const { data, loading } = props;
+    const { data, setRequest, request } = props;
+
+    const loading = useSelector(state => state.personalData.loading);
+
+    useEffect(() => {
+        console.log("Data Personal ", data)
+        if (data && Object.keys(data).length > 0) {
+            setRequest({
+                ...request,
+                "personalData": {
+                    "legajo": data ? data.legajo : null,
+                    "fechaDeIngreso": data ? data.fechaDeIngreso : null,
+                    "puesto": data ? data.puesto : null,
+                    "seniority": data ? data.seniority : null,
+                    "idEstudioMaximoAlcanzado": data && data.estudioMaximoAlcanzado != null ? data.estudioMaximoAlcanzado.id : null,
+                    "idNivelDeIngles": data && data.nivelDeIngles != null ? data.nivelDeIngles.id : null,
+                    "idNivelInglesBritanico": data && data.nivelInglesBritanico != null ? data.nivelInglesBritanico.id : null,
+                    "idNivelMetAgiles": data && data.nivelMetAgiles != null ? data.nivelMetAgiles.id : null,
+                }
+            })
+            console.log(" Request pesonalData ", request)
+        }
+    }, [data])
     return (
         <div>
             <Grid
@@ -71,6 +96,8 @@ export default function InitialPersonalData(props) {
                     <PersonalDataGrid
                         data={data}
                         loading={loading}
+                        setRequest={setRequest}
+                        request={request}
                     />
                 </Grid>
             </Grid>

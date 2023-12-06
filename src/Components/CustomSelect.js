@@ -32,23 +32,18 @@ const useStyles = makeStyles({
 })
 
 export default function CustomSelect(props) {
-  const {label, objects, value, typographySize} = props;
-  const [selection, setSelection] = useState(value ? value : -1);
+  const {label, objects, val, typographySize, handleChangeSelect, defaultValue} = props;
   const classes = useStyles();
-
-  const handleChange = (event) => {
-    setSelection(event.target.value)
-  };
-
   return (
     
     <FormControl style={{minWidth: '100%'}}>
     
       <Select
         labelId={label}
-        value={selection}
+        defaultValue={val ? val : ""}
+        value={val}
         label={label}
-        onChange={handleChange}
+        onChange={handleChangeSelect}
         displayEmpty
         className={classes.select} 
         autoWidth

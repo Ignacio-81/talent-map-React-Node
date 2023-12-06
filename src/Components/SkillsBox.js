@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getPersonalSkills } from '../redux/actions/personalDataActions.js'
@@ -37,25 +37,56 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SkillsBox(props) {
-    const { mainSkills } = props
+    const { mainSkills, setRequest, request } = props
     const classes = useStyles();
     const dispatch = useDispatch();
+    const [getInfo, setGetInfo] = useState(false)
     //Get information on component Load
     useEffect(() => {
         const getPersonalSkillsInfo = () => dispatch(getPersonalSkills());
         getPersonalSkillsInfo();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
     //Get State
     const personaSkills = useSelector(state => state.personalData.personaSkills);
     const errorSkillsData = useSelector(state => state.personalData.errorSkillsData);
     const loading = useSelector(state => state.personalData.loading);
 
+    useEffect(() => {
+        if (personaSkills.data && Object.keys(personaSkills.data).length > 0) {
+            setRequest({
+                ...request,
+                "skills": {
+                    "sistema01": {
+                        "idSistemaOp": personaSkills.data && personaSkills.data.sistema01.sistemaOp != null ? personaSkills.data.sistema01.sistemaOp.id : null,
+                        "idNivel": personaSkills.data && personaSkills.data.sistema01.nivel != null ? personaSkills.data && personaSkills.data.sistema01.nivel.id : null,
+                        "idTiempo": personaSkills.data && personaSkills.data.sistema01.tiempo != null ? personaSkills.data && personaSkills.data.sistema01.tiempo.id : null,
+                        "comentarios": personaSkills.data && personaSkills.data.sistema01.comentarios != null ? personaSkills.data && personaSkills.data.sistema01.comentarios : null,
+                    },
+                    "sistema02": {
+                        "idSistemaOp": personaSkills.data && personaSkills.data.sistema02.sistemaOp != null ? personaSkills.data.sistema02.sistemaOp.id : null,
+                        "idNivel": personaSkills.data && personaSkills.data.sistema02.nivel != null ? personaSkills.data && personaSkills.data.sistema02.nivel.id : null,
+                        "idTiempo": personaSkills.data && personaSkills.data.sistema02.tiempo != null ? personaSkills.data && personaSkills.data.sistema02.tiempo.id : null,
+                        "comentarios": personaSkills.data && personaSkills.data.sistema02.comentarios != null ? personaSkills.data && personaSkills.data.sistema02.comentarios : null,
+                    },
+                    "otro": {
+                        "sistemaOp": personaSkills.data && personaSkills.data.otro.sistemaOp != null ? personaSkills.data.otro.sistemaOp : null,
+                        "idNivel": personaSkills.data && personaSkills.data.otro.nivel != null ? personaSkills.data && personaSkills.data.otro.nivel.id : null,
+                        "idNivel": personaSkills.data && personaSkills.data.otro.tiempo != null ? personaSkills.data && personaSkills.data.otro.tiempo.id : null,
+                        "comentarios": personaSkills.data && personaSkills.data.otro.comentarios != null ? personaSkills.data && personaSkills.data.otro.comentarios : null,
+                    },
+                },
+            })
+            setGetInfo(true)        
+        }
+    }, [personaSkills])
+
+
     return (
         <div className={classes.box}>
             {/* //Barra devisión Competencias */}
             <DividerBar />
-            {loading ?
+            {(loading || !getInfo) ?
                 <CustomLoading loading={loading} />
                 :
                 mainSkills.map(skill => (
@@ -74,6 +105,8 @@ export default function SkillsBox(props) {
                                 data={personaSkills.data && Object.keys(personaSkills.data).length ? personaSkills.data : null}
                                 skill={skill}
                                 error={errorSkillsData}
+                                request={request.skills && Object.keys(request.skills).length ? request : null}
+                                setRequest={setRequest}
                             />
                         </AccordionDetails>
                     </Accordion>

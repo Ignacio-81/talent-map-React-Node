@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { getPersonalData, savePersonalDataError } from '../redux/actions/personalDataActions.js'
 import { useSelector, useDispatch } from 'react-redux';
-import { getPersonalData } from '../redux/actions/personalDataActions.js'
 //Material
 import { makeStyles } from '@material-ui/core/styles';
 //Components
 import MainBar from './MainBar.js';
 import InitialPersonalData from './InitialPersonalData.js'
 import SkillsBox from './SkillsBox.js';
+//SweetAlert
+import Swal from 'sweetalert2'
 //Constants
 import { mainSkills } from '../Utils/consts.js'
 
@@ -26,19 +28,34 @@ const useStyles = makeStyles({
     }
 })
 
-
 export default function Form() {
     const classes = useStyles();
+    const [request, setRequest] = useState({})
     const dispatch = useDispatch();
+    const showSwal = () => {
+        Swal.fire({
+            icon: "error",
+            title: "Error al guardar los datos",
+            text: "Por favor pruebe nuevamente",
+        })
+      }
     //Get information on component Load
     useEffect(() => {
         const getPersonalInformation = () => dispatch(getPersonalData());
         getPersonalInformation();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //Get State
     const personalInformation = useSelector(state => state.personalData.personalData);
-    const loading = useSelector(state => state.personalData.loading);
+    const saveError = useSelector(state => state.personalData.errorPersonalDataSave)
+
+    useEffect(() => {
+        if (saveError){
+            showSwal()
+            dispatch(savePersonalDataError(false))
+        }
+    }, [saveError])
 
     return (
         <div className={classes.root}>
@@ -46,18 +63,21 @@ export default function Form() {
             <MainBar
                 nombre={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data.nombre : ''}
                 apellido={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data.apellido : ''}
+                request={request}
             />
 
             <main className={classes.content}>
                 {/* //Informacion personal */}
                 <InitialPersonalData
                     data={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data : null}
-                    /* error={errorPersonalData} */
-                    loading={loading}
+                    setRequest={setRequest}
+                    request={request}
                 />
                 {/* //Caja de competencias */}
                 <SkillsBox
                     mainSkills={mainSkills}
+                    setRequest={setRequest}
+                    request={request}
                 />
             </main>
         </div>
