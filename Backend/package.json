@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Ignacio-81/mapa-de-talento/issues"
   },
-  "homepage": "https://github.com/Ignacio-81/mapa-de-talento#readme"
+  "homepage": "https://github.com/Ignacio-81/mapa-de-talento#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
