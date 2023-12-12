@@ -5,18 +5,18 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { Server as IOServer } from "socket.io";
 import { engine } from "express-handlebars"
-import Container from "./db/DB-container.js";
+import Container from "../db/DB-container.js";
 import configMySql from './db/config/config_mysql.js'
 import configSqlite from './db/config/config_sqlite.js'
 import insertProds from "./data/create-prods.js"
 import createProdTable from "./data/table/create-prod-table-mysql.js"
 import createChatTable from "./data/table/create-chat-table-sqlite.js"
 import router from "./routes/index.js"
-import { mongoConnect } from './db/config/mongoConfig.js';
+import { mongoConnect } from '../db/config/mongoConfig.js';
 import passport from "passport";
 import { passportStrategies } from "./lib/passport.lib.js";
-import { User } from "./db/config/user.model.js"
-import { configObject } from "./db/config/index.js";
+import { User } from "../db/config/user.model.js"
+import { configObject } from "../db/config/index.js";
 
 const mongoOptions = {
     useNewUrlParser: true,
