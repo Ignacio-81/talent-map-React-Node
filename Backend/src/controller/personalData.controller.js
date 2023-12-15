@@ -17,9 +17,13 @@ export class PersonalDataController {
     }
     async getPersonalSkills(ctx) {
         try {
-
+            const response = await personalDataService.getPersonalSkills(ctx.params.id);
+            ctx.response.status = 200;
+            ctx.body = {
+              data: response,
+            };
         } catch (e) {
-            console.log(e);
+            console.log(JSON.stringify(e));
             ctx.response.status = 404;
             ctx.body = {
                 data: "No Personal Skills Information.",
@@ -28,7 +32,14 @@ export class PersonalDataController {
     }
     async updatePersonalDataSkills(ctx) {
         try {
-
+            const id = ctx.params.id;
+            const data = ctx.body.data
+            console.log("controller",data)
+            const response = await personalDataService.saveDataSkills(id,data);
+            ctx.response.status = 200;
+            ctx.body = {
+              data: response,
+            };
         } catch (e) {
             console.log(e);
             ctx.response.status = 404;

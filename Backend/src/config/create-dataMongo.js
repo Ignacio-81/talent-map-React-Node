@@ -7,9 +7,9 @@ const insertPersonalDataMongo = async () => {
     await skills.deleteMany(); //reset all the old products.
     //Add new products:
     await new personalData({
+        legajo: 358,
         nombre: "Ignacio",
         apellido:"Badella",
-        legajo: 758,
         fechaDeIngreso: "2021-06-01",
         puesto: "Developer",
         seniority: "Jr",
@@ -21,6 +21,7 @@ const insertPersonalDataMongo = async () => {
         idNivelMetAgiles: 2
     }).save();
     await new skills({
+        legajo: 358,
         sistema01:{
             idSistemaOp: 1,
             idNivel: 1,

@@ -8,8 +8,7 @@ const config = {
   host: process.env.HOST || "localhost",
   mongoDb: process.env.MONGO_URL,
   apikeyMongoStoreSession: process.env.AKMSS,
-  //Tipo persistencia MEM -MONGO - MySQL
-  tipo_persistencia: process.env.TIPO_PERSISTENCIA || "MONGO",
+  searchIdForMongo: "legajo"
 };
 
 export default config;

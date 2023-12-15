@@ -8,11 +8,6 @@ import MongoClient from "./classes/MongoClient.class.js";
 import config from "./config/config.js";
 import insertPersonalDataMongo from "./config/create-dataMongo.js"
 
-/* const mongoOptions = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}; */
-
 const app = new Koa();
 const db = new MongoClient();
 
@@ -44,8 +39,14 @@ app.use(bodyParser());
 app.use(bodyParser({ urlencoded: { extended: true } }));
 app.use(koaBody());
 app.use(async (ctx, next) => {
-    console.log("Request body:", ctx.request.rawBody);
-    await next();
+    try {
+        console.log("Request body:", ctx.request.rawBody);
+        await next();
+    } catch (err) {
+        ctx.status = err.status || 500;
+        ctx.body = err.message;
+        ctx.app.emit('error', err, ctx);
+    }
 });
 app.use(router.routes());
 app.use(invalidUrl);

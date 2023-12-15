@@ -1,6 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const skillsSchema = new Schema({
+    legajo: { type: Schema.Types.Number, require: true, max: 1000 },
     sistema01:{
         idSistemaOp:{ type: Schema.Types.Number, require: true, max: 10 },
         idNivel:{ type: Schema.Types.Number, require: true, max: 10 },

@@ -1,6 +1,8 @@
 import MongoClient from "../classes/MongoClient.class.js";
 import CustomError from "../classes/CustomError.class.js";
+import config from "../config/config.js"
 
+const searchId = config.searchIdForMongo //Configure this param in order to set for which param to search on Mongo collection.
 export default class MongoDao {
   constructor(collection) {
     this.db = new MongoClient();
@@ -10,9 +12,7 @@ export default class MongoDao {
   async findById(id) {
     try {
       await this.db.connect();
-      //Find object inside the array with the id
-
-      const data = await this.collection.find({ _id: id });
+      const data = await this.collection.find({ [searchId] : id });
       return data[0];
     } catch (err) {
       const error = new CustomError(
@@ -51,13 +51,12 @@ export default class MongoDao {
     }
   }
 
-  async modif(id, data) {
+  async update(id, data) {
     try {
       await this.db.connect();
-      const response = await this.collection.updateOne({ _id: id }, data);
+      const response = await this.collection.updateOne({ [searchId] : id }, data);
       if (response.modifiedCount) {
-        console.log("respuesta");
-        console.log(response);
+        console.log("respuesta",response);
         return data;
       } else {
         throw new Error(`A problem while updating object: ${response}`);
@@ -72,7 +71,7 @@ export default class MongoDao {
   async deleteById(id) {
     try {
       await this.db.connect();
-      const response = await this.collection.deleteOne({ _id: id });
+      const response = await this.collection.deleteOne({[searchId] : id });
       if (response.deletedCount) {
       } else {
         throw new Error(`A problem while deleting object: ${response}`);
