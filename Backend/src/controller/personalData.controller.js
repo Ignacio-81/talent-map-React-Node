@@ -2,8 +2,7 @@ import {personalDataService} from "../services/personalData.service.js";
 export class PersonalDataController {
     async getPersonalData(ctx) {
         try {
-            //const response = await personalDataService.getPersonalData(ctx.params.id);
-            const response = "Aca anduvo"
+            const response = await personalDataService.getPersonalData(ctx.params.id);
             ctx.response.status = 200;
             ctx.body = {
               data: response,
