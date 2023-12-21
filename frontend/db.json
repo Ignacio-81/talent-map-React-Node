@@ -1,21 +1,9 @@
 {
   "nivel": [
-    {
-      "id": 0,
-      "data": "Inicial"
-    },
-    {
-      "id": 1,
-      "data": "Intermedio"
-    },
-    {
-      "id": 2,
-      "data": "Avanzado"
-    },
-    {
-      "id": 3,
-      "data": "Certificado"
-    }
+    {"id": 0,"data": "Inicial"},
+    {"id": 1,"data": "Intermedio"},
+    {"id": 2,"data": "Avanzado" },
+    {"id": 3,"data": "Certificado"}
   ],
   "estudios": [
     { "id": 0, "data": "Primario" },

@@ -46,9 +46,9 @@ async function getPersonalSkills(id) {
       }
   }
 
-  async function saveDataSkills(id, data) {
+  async function saveDataSkills(data) {
     try {
-        console.log("save data", id, data );
+        console.log("save data", data );
       if (id) {
         if (!await personalDataApi.findById(id) ) {
           throw {
@@ -62,10 +62,8 @@ async function getPersonalSkills(id) {
               status: 400,
             };
           }
-        let newPData = await personalDataApi.save(id, data.personalData);
-        //newPData = { _id: id, ...newPData };
-        let newSData = await skillsApi.save(id, data.skills);
-        //newSData = { _id: id, ...newSData };
+        let newPData = await personalDataApi.save(data.personalData);
+        let newSData = await skillsApi.save(data.skills);
         console.log(newPData,newSData );
         
         return {newPData,newSData};
@@ -76,9 +74,37 @@ async function getPersonalSkills(id) {
       throw new Error(err);
     }
   }
-
+  async function updateDataSkills(id, data) {
+    try {
+        console.log("update data", id, data );
+      if (id) {
+        if (!await personalDataApi.findById(id) ) {
+          throw {
+            message: "No personal data for this id was found",
+            status: 400,
+          };
+        }
+        if (!await skillsApi.findById(id) ) {
+            throw {
+              message: "No skills for this id was found",
+              status: 400,
+            };
+          }
+        let newPData = await personalDataApi.update(id, data.personalData);
+        let newSData = await skillsApi.update(id, data.skills);
+        console.log(newPData,newSData );
+        
+        return {newPData,newSData};
+      } else {
+        throw new Error("Please send a valid id");
+      }
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
   export const personalDataService = {
     getPersonalData,
     getPersonalSkills,
-    saveDataSkills
+    saveDataSkills,
+    updateDataSkills
   }

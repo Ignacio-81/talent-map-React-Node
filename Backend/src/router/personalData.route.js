@@ -1,5 +1,5 @@
 import Router from "koa-router";
-import { PersonalDataController } from "../controller/personalData.controller.js"
+import PersonalDataController from "../controller/personalData.controller.js"
 const personalData = new PersonalDataController()
 
 const router = new Router({

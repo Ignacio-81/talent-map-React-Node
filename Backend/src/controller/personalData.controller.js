@@ -1,5 +1,5 @@
 import {personalDataService} from "../services/personalData.service.js";
-export class PersonalDataController {
+export default class PersonalDataController {
     async getPersonalData(ctx) {
         try {
             const response = await personalDataService.getPersonalData(ctx.params.id);
@@ -33,9 +33,9 @@ export class PersonalDataController {
     async updatePersonalDataSkills(ctx) {
         try {
             const id = ctx.params.id;
-            const data = ctx.body.data
+            const data = ctx.request.body
             console.log("controller",data)
-            const response = await personalDataService.saveDataSkills(id,data);
+            const response = await personalDataService.updateDataSkills(id,data);
             ctx.response.status = 200;
             ctx.body = {
               data: response,

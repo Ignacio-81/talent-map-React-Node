@@ -1,6 +1,6 @@
 import Koa from "koa";
 import { koaBody } from "koa-body";
-import bodyParser from "koa-bodyparser";
+//import bodyParser from "koa-bodyparser";
 import router from "./router/index.js"
 import yargs from "yargs";
 import invalidUrl from "./middleware/invalidUrl.mdw.js";
@@ -20,29 +20,15 @@ export const args = yargs(process.argv.slice(2))
         port: config.port,
     }).argv;
 
-/* app.use(
-    session({
-        secret: "coderhouse",
-        resave: false,
-        rolling: true,
-        saveUninitialized: false,
-        store: new MongoStore({
-            mongoUrl: configObject.mongoUrl,
-            mongoOptions,
-        }),
-        cookie: {
-            expires: 60000 //session will expire without activity
-        }
-    })
-); */
-app.use(bodyParser());
-app.use(bodyParser({ urlencoded: { extended: true } }));
+/* app.use(bodyParser());
+app.use(bodyParser({ urlencoded: { extended: true } })); */
 app.use(koaBody());
 app.use(async (ctx, next) => {
     try {
-        console.log("Request body:", ctx.request.rawBody);
+        console.log("Request body:1", ctx.request.body);
         await next();
-    } catch (err) {
+    }  catch (err) {
+        console.log("Error")
         ctx.status = err.status || 500;
         ctx.body = err.message;
         ctx.app.emit('error', err, ctx);
@@ -64,7 +50,7 @@ app.listen(args.port, () =>
         "Server listening on port :" + args.port)
 );
 app.on("error", (err) => {
-    console.log(err);
+    console.log("Listen Error: ",err);
 });
 
 
