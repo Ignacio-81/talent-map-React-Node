@@ -45,7 +45,6 @@ export default function InitialPersonalData(props) {
     const loading = useSelector(state => state.personalData.loading);
 
     useEffect(() => {
-        console.log("Data Personal ", data)
         if (data && Object.keys(data).length > 0) {
             setRequest({
                 ...request,

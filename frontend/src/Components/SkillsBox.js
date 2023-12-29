@@ -43,14 +43,14 @@ export default function SkillsBox(props) {
     const [getInfo, setGetInfo] = useState(false)
     //Get information on component Load
     useEffect(() => {
-        const getPersonalSkillsInfo = () => dispatch(getPersonalSkills());
-        getPersonalSkillsInfo();
+        dispatch(getPersonalSkills());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     //Get State
     const personaSkills = useSelector(state => state.personalData.personaSkills);
     const errorSkillsData = useSelector(state => state.personalData.errorSkillsData);
     const loading = useSelector(state => state.personalData.loading);
+    const loadingLists = useSelector(state => state.listsData.loading)
 
     useEffect(() => {
         if (personaSkills.data && Object.keys(personaSkills.data).length > 0) {
@@ -86,7 +86,7 @@ export default function SkillsBox(props) {
         <div className={classes.box}>
             {/* //Barra devisión Competencias */}
             <DividerBar />
-            {(loading || !getInfo) ?
+            {(loading || !getInfo || loadingLists) ?
                 <CustomLoading loading={loading} />
                 :
                 mainSkills.map(skill => (

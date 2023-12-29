@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import CustomSelect from './CustomSelect.js'
 import TextField from '@material-ui/core/Input';
@@ -35,7 +36,9 @@ export default function SkillsGrid(props) {
     const [selectSysValues, setselecSystValues] = useState([]);
     const [selectLevValues, setselectLevValues] = useState([]);
     const [selectTimeValues, setselectTimeValues] = useState([]);
-
+    const lists = useSelector(state => state.listsData.listsData);
+    const errorLists = useSelector(state => state.listsData.errorListsData)
+    
     const handleTextChange = (index, value, field) => {
         const newRequest = request
         const updatedValues = [...textValues];
@@ -84,12 +87,12 @@ export default function SkillsGrid(props) {
             spacing={1}>
             <Grid item xs={2} className={classes.placeholder}></Grid>
             <Grid item xs={10} >
-                {error ?
+                {(error || errorLists) ?
                     <Grid >
                         <CustomErrorAlert />
                     </Grid >
                     :
-                    !data ?
+                    (!data || !lists) ?
                         <CustomLabels noData={true} />
                         :
                         Object.values(request.skills).map((sistema, index) => (
@@ -109,7 +112,7 @@ export default function SkillsGrid(props) {
                                             key={Object.keys(request.skills)[index]}
                                             label='Sistema Operativo'
                                             val={selectSysValues[index] ?? sistema.idSistemaOp ?? -1}
-                                            objects={sistemasOperativos}
+                                            objects={lists.sistemasOperativos}
                                             typographySize='body2'
                                             handleChangeSelect={(e) => handleSelectChange(index, e.target.value, "OpSystem")}
                                         />}
@@ -121,7 +124,7 @@ export default function SkillsGrid(props) {
                                         key={Object.keys(request.skills) + index + skill}
                                         label='Nivel-Experiencia'
                                         val={selectLevValues[index] ?? sistema.idNivel ?? -1}
-                                        objects={nivel}
+                                        objects={lists.nivel}
                                         typographySize='body2'
                                         handleChangeSelect={(e) => handleSelectChange(index, e.target.value, "Level")}
                                     />
@@ -131,7 +134,7 @@ export default function SkillsGrid(props) {
                                         key={Object.keys(request.skills) + index + skill}
                                         label='Tiempo experiencia'
                                         val={selectTimeValues[index] ?? sistema.idTiempo ?? -1}
-                                        objects={tiempo}
+                                        objects={lists.tiempo}
                                         typographySize='body2'
                                         handleChangeSelect={(e) => handleSelectChange(index, e.target.value, "Time")}
                                     />
