@@ -1,5 +1,6 @@
 import Koa from "koa";
 import { koaBody } from "koa-body";
+import cors from '@koa/cors'
 //import bodyParser from "koa-bodyparser";
 import router from "./router/index.js"
 import yargs from "yargs";
@@ -20,8 +21,7 @@ export const args = yargs(process.argv.slice(2))
         port: config.port,
     }).argv;
 
-/* app.use(bodyParser());
-app.use(bodyParser({ urlencoded: { extended: true } })); */
+app.use(cors());
 app.use(koaBody());
 app.use(async (ctx, next) => {
     try {

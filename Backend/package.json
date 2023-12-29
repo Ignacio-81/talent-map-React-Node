@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Ignacio-81/mapa-de-talento#readme",
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "koa": "^2.14.2",

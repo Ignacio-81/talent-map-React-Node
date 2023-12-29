@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getPersonalData, savePersonalDataError } from '../redux/actions/personalDataActions.js'
+import { getListsData} from '../redux/actions/listsDataActions.js'
 import { useSelector, useDispatch } from 'react-redux';
 //Material
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,8 +42,9 @@ export default function Form() {
       }
     //Get information on component Load
     useEffect(() => {
-        const getPersonalInformation = () => dispatch(getPersonalData());
-        getPersonalInformation();
+        dispatch(getListsData());
+        dispatch(getPersonalData());
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
