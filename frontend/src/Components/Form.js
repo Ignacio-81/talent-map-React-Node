@@ -63,15 +63,16 @@ export default function Form() {
         <div className={classes.root}>
             {/* //Barra de Navegación principal */}
             <MainBar
-                nombre={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data.nombre : ''}
-                apellido={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data.apellido : ''}
+                nombre={personalInformation && Object.keys(personalInformation).length ? personalInformation.nombre : ''}
+                apellido={personalInformation && Object.keys(personalInformation).length ? personalInformation.apellido : ''}
                 request={request}
+                setRequest ={setRequest}
             />
 
             <main className={classes.content}>
                 {/* //Informacion personal */}
                 <InitialPersonalData
-                    data={personalInformation.data && Object.keys(personalInformation.data).length ? personalInformation.data : null}
+                    data={personalInformation && Object.keys(personalInformation).length ? personalInformation : null}
                     setRequest={setRequest}
                     request={request}
                 />

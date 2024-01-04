@@ -9,6 +9,7 @@ const insertPersonalDataMongo = async () => {
         await lists.deleteMany();
         //Add new info:
         await new personalData({
+            id: 358,
             legajo: 358,
             nombre: "Ignacio",
             apellido: "Badella",
@@ -23,7 +24,7 @@ const insertPersonalDataMongo = async () => {
             idNivelMetAgiles: 2
         }).save();
         await new skills({
-            legajo: 358,
+            id: 358,
             sistema01: {
                 idSistemaOp: 1,
                 idNivel: 1,

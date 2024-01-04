@@ -53,31 +53,32 @@ export default function SkillsBox(props) {
     const loadingLists = useSelector(state => state.listsData.loading)
 
     useEffect(() => {
-        if (personaSkills.data && Object.keys(personaSkills.data).length > 0) {
+        if (personaSkills && Object.keys(personaSkills).length > 0) {
             setRequest({
                 ...request,
                 "skills": {
+                    "id": personaSkills && personaSkills.id != null ? personaSkills.id : null,
                     "sistema01": {
-                        "idSistemaOp": personaSkills.data && personaSkills.data.sistema01.sistemaOp != null ? personaSkills.data.sistema01.sistemaOp.id : null,
-                        "idNivel": personaSkills.data && personaSkills.data.sistema01.nivel != null ? personaSkills.data && personaSkills.data.sistema01.nivel.id : null,
-                        "idTiempo": personaSkills.data && personaSkills.data.sistema01.tiempo != null ? personaSkills.data && personaSkills.data.sistema01.tiempo.id : null,
-                        "comentarios": personaSkills.data && personaSkills.data.sistema01.comentarios != null ? personaSkills.data && personaSkills.data.sistema01.comentarios : null,
+                        "idSistemaOp": personaSkills && personaSkills.sistema01 && personaSkills.sistema01.idSistemaOp != null ? personaSkills.sistema01.idSistemaOp : null,
+                        "idNivel": personaSkills && personaSkills.sistema01 && personaSkills.sistema01.idNivel != null ? personaSkills && personaSkills.sistema01.idNivel : null,
+                        "idTiempo": personaSkills && personaSkills.sistema01 && personaSkills.sistema01.idTiempo != null ? personaSkills && personaSkills.sistema01.idTiempo : null,
+                        "comentarios": personaSkills && personaSkills.sistema01 && personaSkills.sistema01.comentarios != null ? personaSkills && personaSkills.sistema01.comentarios : null,
                     },
                     "sistema02": {
-                        "idSistemaOp": personaSkills.data && personaSkills.data.sistema02.sistemaOp != null ? personaSkills.data.sistema02.sistemaOp.id : null,
-                        "idNivel": personaSkills.data && personaSkills.data.sistema02.nivel != null ? personaSkills.data && personaSkills.data.sistema02.nivel.id : null,
-                        "idTiempo": personaSkills.data && personaSkills.data.sistema02.tiempo != null ? personaSkills.data && personaSkills.data.sistema02.tiempo.id : null,
-                        "comentarios": personaSkills.data && personaSkills.data.sistema02.comentarios != null ? personaSkills.data && personaSkills.data.sistema02.comentarios : null,
+                        "idSistemaOp": personaSkills && personaSkills.sistema02 && personaSkills.sistema02.idSistemaOp != null ? personaSkills.sistema02.idSistemaOp : null,
+                        "idNivel": personaSkills && personaSkills.sistema02 && personaSkills.sistema02.idNivel != null ? personaSkills && personaSkills.sistema02.idNivel : null,
+                        "idTiempo": personaSkills && personaSkills.sistema02 && personaSkills.sistema02.idTiempo != null ? personaSkills && personaSkills.sistema02.idTiempo : null,
+                        "comentarios": personaSkills && personaSkills.sistema02 && personaSkills.sistema02.comentarios != null ? personaSkills && personaSkills.sistema02.comentarios : null,
                     },
                     "otro": {
-                        "sistemaOp": personaSkills.data && personaSkills.data.otro.sistemaOp != null ? personaSkills.data.otro.sistemaOp : null,
-                        "idNivel": personaSkills.data && personaSkills.data.otro.nivel != null ? personaSkills.data && personaSkills.data.otro.nivel.id : null,
-                        "idNivel": personaSkills.data && personaSkills.data.otro.tiempo != null ? personaSkills.data && personaSkills.data.otro.tiempo.id : null,
-                        "comentarios": personaSkills.data && personaSkills.data.otro.comentarios != null ? personaSkills.data && personaSkills.data.otro.comentarios : null,
+                        "sistemaOp": personaSkills && personaSkills.otro && personaSkills.otro.sistemaOp != null ? personaSkills && personaSkills.otro.sistemaOp : null,
+                        "idNivel": personaSkills && personaSkills.otro && personaSkills.otro.idNivel != null ? personaSkills && personaSkills.otro.idNivel : null,
+                        "idTiempo": personaSkills && personaSkills.otro && personaSkills.otro.idTiempo != null ? personaSkills && personaSkills.otro.idTiempo : null,
+                        "comentarios": personaSkills && personaSkills.otro && personaSkills.otro.comentarios != null ? personaSkills && personaSkills.otro.comentarios : null,
                     },
                 },
             })
-            setGetInfo(true)        
+            setGetInfo(true)
         }
     }, [personaSkills])
 
@@ -102,7 +103,7 @@ export default function SkillsBox(props) {
                         <AccordionDetails key={skill} >
                             {/* //Grilla interna de cada competencia */}
                             <SkillsGrid key={skill}
-                                data={personaSkills.data && Object.keys(personaSkills.data).length ? personaSkills.data : null}
+                                data={personaSkills && Object.keys(personaSkills).length ? personaSkills : null}
                                 skill={skill}
                                 error={errorSkillsData}
                                 request={request.skills && Object.keys(request.skills).length ? request : null}

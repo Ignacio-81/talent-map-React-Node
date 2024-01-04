@@ -15,8 +15,8 @@ const initialState = {
     personalData: [],
     personaSkills: [],
     errorPersonalData: null,
-    errorSkillsData:null,
-    errorPersonalDataSave:null,
+    errorSkillsData: null,
+    errorPersonalDataSave: null,
     loading: false,
 
 }
@@ -30,13 +30,25 @@ export default function (state = initialState, action) {
                 loading: action.payload
             }
         case GUARDAR_DATOS_PERSONA_OK:
-            return{
+            const { newPData, newSData } = action.payload.data;
+            if (!newPData && !newSData) {
+                return {
+                    ...state,
+                    loading: false,
+                    errorPersonalDataSave: false,
+                };
+            }
+
+            return {
                 ...state,
                 loading: false,
                 errorPersonalDataSave: false,
-            }
+                ...(newPData && { personalData: newPData }),
+                ...(newSData && { personaSkills: newSData }),
+            };
+
         case GUARDAR_DATOS_PERSONA_ERROR:
-            return{
+            return {
                 ...state,
                 loading: false,
                 errorPersonalDataSave: action.payload

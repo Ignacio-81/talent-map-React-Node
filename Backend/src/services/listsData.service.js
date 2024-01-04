@@ -9,7 +9,6 @@ async function getListsData() {
           if (data) {
             return data;
           } else {
-            console.log("No data with Id: " + id);
             throw {
                 message: "No data for that id",
                 status: 400,

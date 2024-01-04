@@ -49,17 +49,21 @@ export default function InitialPersonalData(props) {
             setRequest({
                 ...request,
                 "personalData": {
-                    "legajo": data ? data.legajo : null,
-                    "fechaDeIngreso": data ? data.fechaDeIngreso : null,
-                    "puesto": data ? data.puesto : null,
-                    "seniority": data ? data.seniority : null,
-                    "idEstudioMaximoAlcanzado": data && data.estudioMaximoAlcanzado != null ? data.estudioMaximoAlcanzado.id : null,
-                    "idNivelDeIngles": data && data.nivelDeIngles != null ? data.nivelDeIngles.id : null,
-                    "idNivelInglesBritanico": data && data.nivelInglesBritanico != null ? data.nivelInglesBritanico.id : null,
-                    "idNivelMetAgiles": data && data.nivelMetAgiles != null ? data.nivelMetAgiles.id : null,
+                    "id": data && data.legajo ? data.legajo : null,
+                    "nombre": data && data.nombre ? data.nombre : null,
+                    "apellido": data && data.apellido ? data.apellido : null,
+                    "legajo": data && data.legajo ? data.legajo : null,
+                    "fechaDeIngreso": data && data.fechaDeIngreso ? data.fechaDeIngreso : null,
+                    "puesto": data && data.puesto ? data.puesto : null,
+                    "seniority": data && data.seniority ? data.seniority : null,
+                    "cv": data && data.cv ? data.cv : null,
+                    "idEstudioMaximoAlcanzado": data && data.idEstudioMaximoAlcanzado != null ? data.idEstudioMaximoAlcanzado : null,
+                    "idNivelDeIngles": data && data.idNivelDeIngles != null ? data.idNivelDeIngles : null,
+                    "idNivelInglesBritanico": data && data.idNivelInglesBritanico != null ? data.idNivelInglesBritanico : null,
+                    "idNivelMetAgiles": data && data.idNivelMetAgiles != null ? data.idNivelMetAgiles : null,
+                    "certificadoIngles": data && data.certificadoIngles != null ? data.certificadoIngles : null,
                 }
             })
-            console.log(" Request pesonalData ", request)
         }
     }, [data])
     return (
@@ -72,7 +76,6 @@ export default function InitialPersonalData(props) {
                 spacing={2}
                 className={classes.root}
             >
-
                 <Grid item>
                     <Card className={classes.card}>
                         <CardActionArea>

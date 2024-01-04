@@ -28,11 +28,14 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 40
     },
 }));
-
 export default function MainBar(props) {
     const classes = useStyles();
-    const { nombre, apellido, request } = props;
+    const { nombre, apellido, request, setRequest } = props;
     const dispatch = useDispatch();
+
+    const callbackSave = (id) =>{
+        
+    }
     return (
         <div >
             <AppBar>
@@ -43,7 +46,7 @@ export default function MainBar(props) {
                         className={classes.menuButton}
                         startIcon={<SaveIcon />}
                         onClick={() => dispatch(updatePersonaInformation(request))}
-                        >GUARDAR</Button>
+                    >GUARDAR</Button>
                 </Toolbar>
             </AppBar>
         </div>

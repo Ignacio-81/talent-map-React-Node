@@ -40,7 +40,7 @@ app.use(invalidUrl);
 try {
     await db.connect();
     await insertPersonalDataMongo();
-    await db.disconnect();
+    /* await db.disconnect(); */
 } catch (err) {
     console.error(err)
 }
@@ -49,9 +49,20 @@ app.listen(args.port, () =>
     console.log(
         "Server listening on port :" + args.port)
 );
+
 app.on("error", (err) => {
     console.log("Listen Error: ",err);
 });
 
-
-
+process.on('exit', async () => {
+    // Asynchronous tasks can be performed here
+    console.log('Goodbye!');
+  });
+process.on('SIGINT', async () => {
+// Code to run before the application terminates due to Ctrl+C
+console.log('Received SIGINT. Cleaning up...');
+// Additional cleanup logic or asynchronous tasks can be performed here
+await db.disconnect();
+// Exiting the process
+process.exit();
+});

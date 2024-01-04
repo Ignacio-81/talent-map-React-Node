@@ -11,7 +11,7 @@ export default class MongoDao {
 
   async findById(id) {
     try {
-      await this.db.connect();
+      /* await this.db.connect(); */
       const data = await this.collection.find({ [searchId] : id });
       return data[0];
     } catch (err) {
@@ -20,12 +20,12 @@ export default class MongoDao {
         "Error getting data from the database"
       );
     } finally {
-      await this.db.disconnect();
+      /* await this.db.disconnect(); */
     }
   }
   async findAll() {
     try {
-      await this.db.connect();
+      /* await this.db.connect(); */
       const data = await this.collection.find({});
       return data;
     } catch (err) {
@@ -34,37 +34,41 @@ export default class MongoDao {
         "Error getting data from the database"
       );
     } finally {
-      await this.db.disconnect();
+      /* await this.db.disconnect(); */
     }
   }
 
   async save(data) {
     try {
-      await this.db.connect();
+      /* await this.db.connect(); */
       const res = await this.collection(data).save();
       console.log("New Product Inserted");
       return res._id;
     } catch (err) {
       const error = new CustomError(500, "Error while writing DataBase:");
     } finally {
-      await this.db.disconnect();
+      /* await this.db.disconnect(); */
     }
   }
 
   async update(id, data) {
     try {
-      await this.db.connect();
+      /* await this.db.connect(); */
       const response = await this.collection.updateOne({ [searchId] : id }, data);
       if (response.modifiedCount) {
         console.log("respuesta",response);
         return data;
       } else {
-        throw new Error(`A problem while updating object: ${response}`);
+        if (response.matchedCount === 1 && response.modifiedCount === 0) 
+            console.log("No information modified for this object",data);
+        else    
+            throw new Error(`A problem while updating object:`,response);
       }
     } catch (err) {
-      const error = new CustomError(500, "Error while reading DataBase");
+      const error = new CustomError(500, "Error while updating DataBase");
+      console.log(error,err.message);
     } finally {
-      await this.db.disconnect();
+      /* await this.db.disconnect(); */
     }
   }
 

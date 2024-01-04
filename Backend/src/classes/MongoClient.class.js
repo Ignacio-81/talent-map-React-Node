@@ -15,6 +15,7 @@ export default class MongoClient extends DBClient {
       await this.client.connect(config.mongoDb, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000
       });
 
       this.connected = true;
@@ -38,7 +39,6 @@ export default class MongoClient extends DBClient {
     } catch (err) {
       const error = new CustomError(500, "Error disconnecting to the database");
       console.log(error);
-
       throw error;
     }
   }

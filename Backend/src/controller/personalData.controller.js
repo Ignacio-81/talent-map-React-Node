@@ -2,7 +2,7 @@ import {personalDataService} from "../services/personalData.service.js";
 export default class PersonalDataController {
     async getPersonalData(ctx) {
         try {
-            const response = await personalDataService.getPersonalData(ctx.params.id);
+            const response = await personalDataService.getPersonalData(ctx.request.body.id);
             ctx.response.status = 200;
             ctx.body = {
               data: response,
@@ -17,7 +17,7 @@ export default class PersonalDataController {
     }
     async getPersonalSkills(ctx) {
         try {
-            const response = await personalDataService.getPersonalSkills(ctx.params.id);
+            const response = await personalDataService.getPersonalSkills(ctx.request.body.id);
             ctx.response.status = 200;
             ctx.body = {
               data: response,
@@ -32,7 +32,7 @@ export default class PersonalDataController {
     }
     async updatePersonalDataSkills(ctx) {
         try {
-            const id = ctx.params.id;
+            const id = ctx.request.body.id;
             const data = ctx.request.body
             console.log("controller",data)
             const response = await personalDataService.updateDataSkills(id,data);
@@ -44,7 +44,7 @@ export default class PersonalDataController {
             console.log(e);
             ctx.response.status = 404;
             ctx.body = {
-                data: "Data for id: " + ctx.params.id + " does not exists",
+                data: "Data for id: " + ctx.request.body.id + " does not exists",
             };
         }
     }

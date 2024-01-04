@@ -15,16 +15,13 @@ export function getListsData() {
                 if (response.status === 200) {
                     response.json()
                         .then(data => {
-                            console.log('fetch listas:', data.data[0])
                             dispatch(downloadListsOK(data.data[0]))
                         })
                 } else {
-                    console.log(response.status)
                     dispatch(downloadListsError())
                 }
             })
             .catch(err => {
-                console.log( "error fetch ")
                 console.log(err)
                 dispatch(downloadListsError())
             })
