@@ -1,6 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const personalDataSchema = new Schema({
+    id: { type: Schema.Types.Number, require: true, max: 1000 },
     legajo: { type: Schema.Types.Number, require: true, max: 1000 },
     nombre: { type: Schema.Types.String, require: true, max: 50 },
     apellido: { type: Schema.Types.String, require: true, max: 50 },

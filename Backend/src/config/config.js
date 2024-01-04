@@ -8,7 +8,7 @@ const config = {
   host: process.env.HOST || "localhost",
   mongoDb: process.env.MONGO_URL,
   apikeyMongoStoreSession: process.env.AKMSS,
-  searchIdForMongo: "legajo"
+  searchIdForMongo: "id"
 };
 
 export default config;

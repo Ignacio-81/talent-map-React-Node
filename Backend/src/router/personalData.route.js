@@ -6,7 +6,7 @@ const router = new Router({
     prefix: "/personal",
   });
   
-  router.get("/data/:id?", personalData.getPersonalData);
-  router.get("/skills/:id?", personalData.getPersonalSkills);
-  router.put("/:id?", personalData.updatePersonalDataSkills);
+  router.post("/data", personalData.getPersonalData);
+  router.post("/skills", personalData.getPersonalSkills);
+  router.put("/", personalData.updatePersonalDataSkills);
 export default router

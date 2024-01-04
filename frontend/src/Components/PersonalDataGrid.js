@@ -13,10 +13,6 @@ import CustomLabels from './CustomLabels.js'
 
 //Data & Contants
 import { txtPersonalData, URL_TEST_INGLES } from '../Utils/consts.js'
-import { nivel, nivelInglesBritanicoTxt, estudios } from '../Utils/data.js'
-
-//Redux:
-import { getListsData } from '../redux/actions/listsDataActions.js'
 
 export default function PersonalDataGrid(props) {
     const { data, loading, setRequest, request } = props;
@@ -27,9 +23,9 @@ export default function PersonalDataGrid(props) {
         const newRequest = request
         updatedValues[index] = value;
         setTextValues(updatedValues);
-
         switch (index) {
             case 0:
+                newRequest.id = Number(updatedValues[index])
                 newRequest.personalData.legajo = Number(updatedValues[index])
                 break;
             case 1:
@@ -46,11 +42,6 @@ export default function PersonalDataGrid(props) {
         setRequest(newRequest)
     };
 
-    //Get information on component Load
-/*     useEffect(() => {
-        dispatch(getListsData());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []) */
     const errorPersonalData = useSelector(state => state.personalData.errorPersonalData);
     const lists = useSelector(state => state.listsData.listsData)
     const errorLists = useSelector(state => state.listsData.errorListsData)
@@ -67,7 +58,7 @@ export default function PersonalDataGrid(props) {
                 (loading || loadingLists) ?
                     <CustomLoading loading={loading} />
                     :
-                    (!request.personalData || !lists)?
+                    (!data || !lists) ?
                         <CustomLabels noData={true} />
                         :
 
@@ -85,14 +76,26 @@ export default function PersonalDataGrid(props) {
                                         justifyContent="flex-start"
                                         alignItems="flex-start"
                                     >
-                                        {
-                                            Object.values(data).slice(2, 6).map((txt, index) =>
-                                                <TextField key={Object.keys(data)[index]}
-                                                    value={textValues[index] ?? txt ?? ""}
-                                                    fullWidth
-                                                    onChange={(e) => handleTextChange(index, e.target.value)}
-                                                />
-                                            )}
+                                        <TextField
+                                            value={textValues[0] ?? data.legajo ?? ""}
+                                            fullWidth
+                                            onChange={(e) => handleTextChange(0, e.target.value)}
+                                        />
+                                        <TextField
+                                            value={textValues[1] ?? data.fechaDeIngreso ?? ""}
+                                            fullWidth
+                                            onChange={(e) => handleTextChange(1, e.target.value)}
+                                        />
+                                        <TextField
+                                            value={textValues[2] ?? data.puesto ?? ""}
+                                            fullWidth
+                                            onChange={(e) => handleTextChange(2, e.target.value)}
+                                        />
+                                        <TextField
+                                            value={textValues[3] ?? data.seniority ?? ""}
+                                            fullWidth
+                                            onChange={(e) => handleTextChange(3, e.target.value)}
+                                        />
                                         <Grid xs={3} item container={true} direction="row" justifyContent="center" >
                                             <CustomSelect
                                                 label='Estudios'

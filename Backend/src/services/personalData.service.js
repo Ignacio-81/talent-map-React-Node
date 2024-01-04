@@ -19,7 +19,15 @@ async function getPersonalData(id) {
               };
           }
         } else if (id === undefined || id === null) {
-          throw new Error("Id can't be empty");
+            const data = await personalDataApi.findAll();
+            if (data) {
+              return data;
+            } else {
+              throw {
+                  message: "No data for that id",
+                  status: 400,
+                };
+            }
         }
       } catch (err) {
         throw new Error(err);
@@ -39,7 +47,15 @@ async function getPersonalSkills(id) {
               };
           }
         } else if (id === undefined || id === null) {
-          throw new Error("Id can't be empty");
+            const data = await skillsApi.findAll();
+            if (data) {
+              return data;
+            } else {
+              throw {
+                  message: "No data for that id",
+                  status: 400,
+                };
+            }
         }
       } catch (err) {
         throw new Error(err);
@@ -76,25 +92,23 @@ async function getPersonalSkills(id) {
   }
   async function updateDataSkills(id, data) {
     try {
-        console.log("update data", id, data );
-      if (id) {
-        if (!await personalDataApi.findById(id) ) {
+      if (data.personalData.id && data.skills.id) {
+        if (!await personalDataApi.findById(data.personalData.id) ) {
           throw {
             message: "No personal data for this id was found",
             status: 400,
           };
         }
-        if (!await skillsApi.findById(id) ) {
+        if (!await skillsApi.findById(data.skills.id) ) {
             throw {
               message: "No skills for this id was found",
               status: 400,
             };
           }
-        let newPData = await personalDataApi.update(id, data.personalData);
-        let newSData = await skillsApi.update(id, data.skills);
-        console.log(newPData,newSData );
-        
-        return {newPData,newSData};
+        let newPData = await personalDataApi.update(data.personalData.id, data.personalData);
+        let newSData = await skillsApi.update(data.skills.id, data.skills);
+        console.log("No data ",newPData,newSData );
+        return {newPData,newSData} 
       } else {
         throw new Error("Please send a valid id");
       }

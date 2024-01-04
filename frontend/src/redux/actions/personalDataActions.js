@@ -12,21 +12,21 @@ import {
 } from '../types.js'
 
 // Download data from DB
-export function getPersonalData() {
+export function getPersonalData(request) {
     return async (dispatch) => {
         dispatch(downloadPersonalData())
-        fetch(URL_GET_DATOS_PERSONALES, {
-            method: 'GET',
+        fetch(URL_GET_DATOS_PERSONALES,{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(request)
         })
             .then((response) => {
                 if (response.status === 200) {
                     response.json()
                         .then(data => {
-                            console.log('fetch Personal Data:'+ JSON.stringify(data))
-                            dispatch(downloadPersonalDataOK(data))
+                            dispatch(downloadPersonalDataOK(data.data[0]))
                         })
                 } else {
-                    console.log(response.status)
                     dispatch(downloadPersonalDataError())
                 }
             })
@@ -38,21 +38,21 @@ export function getPersonalData() {
 }
 
 // Download data from DB
-export function getPersonalSkills() {
+export function getPersonalSkills(request) {
     return async (dispatch) => {
         dispatch(downloadPersonalData())
-        fetch(URL_GET_SKILLS_PERSONALES, {
-            method: 'GET',
+        fetch(URL_GET_SKILLS_PERSONALES,{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(request)
         })
             .then((response) => {
                 if (response.status === 200) {
                     response.json()
                         .then(data => {
-                            console.log('fetch skills:'+ JSON.stringify(data))
-                            dispatch(downloadPersonalSkillsOK(data))
+                            dispatch(downloadPersonalSkillsOK(data.data[0]))
                         })
                 } else {
-                    console.log(response.status)
                     dispatch(downloadSkillsDataError())
                 }
             })
@@ -102,16 +102,19 @@ export function updatePersonaInformation (request) {
     return(async (dispatch) =>{
         dispatch(savePersonalData())
         fetch (URL_POST_DATOS_PERSONALES, {
-            method: 'POST',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(request)
         })
         .then((response) => {
+            if (response.status === 200){
             response.json()
-            .then(data => {
-                data == 200 ? dispatch(savePersonalDataOK(data.body))
-                : dispatch(savePersonalDataError(true))
-            })
+                .then(data => {
+                    dispatch(savePersonalDataOK(data))
+                })
+            }else{
+                dispatch(savePersonalDataError(true))
+            }
         })
         .catch(() => dispatch(savePersonalDataError(true)))
     })
